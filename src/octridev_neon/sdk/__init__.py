@@ -107,4 +107,4 @@ class AsyncNeon(_NeonBase):
         self.functions = _AsyncFunctionsNamespace(config)
 
 
-__all__ = ["Neon", "AsyncNeon"]
+__all__ = ["AsyncNeon", "Neon"]
