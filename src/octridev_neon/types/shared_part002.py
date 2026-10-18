@@ -4,9 +4,9 @@
 from __future__ import annotations
 
 import datetime
-from typing import Annotated
+from typing import Annotated, Literal
 
-from pydantic import BaseModel, ConfigDict, WrapValidator, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, Field, WrapValidator, field_validator, model_validator
 from typing_extensions import TypeAliasType
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
@@ -27,8 +27,10 @@ from octridev_neon.types.shared_part001 import (
 from octridev_neon.types.shared_standard import StandardEmailServer, StandardEmailServerResponse
 
 from ..validation import (
+    open_union,
     read_date_time,
     validate_date_time,
+    validate_enum,
     validate_length,
     validate_pattern,
     validate_range,
@@ -60,19 +62,39 @@ class SharedEmailServer(BaseModel):
     """Email address used as the sender for outgoing messages from this shared email server."""
     sender_name: str | NotGiven = NOT_GIVEN
     """Display name shown as the sender in outgoing emails."""
+    type: Literal["shared"]
+    """Optional enumerated value serialized in the `type` wire field."""
+
+    @field_validator("type")
+    @classmethod
+    def _validate_type(cls, value):
+        validate_enum("type", value, ["shared"])
+        return value
+
+
+class UnknownNeonAuthEmailServerConfig(BaseModel):
+    """A `NeonAuthEmailServerConfig` whose `type` names no branch this SDK knows, kept as received."""
+
+    model_config = ConfigDict(extra="allow")
 
 
 # NeonAuthEmailServerConfig is a union type
 NeonAuthEmailServerConfig = TypeAliasType(
     "NeonAuthEmailServerConfig",
-    "Annotated[StandardEmailServer, WrapValidator(validate_union_candidate)] | Annotated[SharedEmailServer, WrapValidator(validate_union_candidate)]",
+    'Annotated[Annotated[StandardEmailServer, WrapValidator(validate_union_candidate)] | Annotated[SharedEmailServer, WrapValidator(validate_union_candidate)], Field(discriminator="type"), WrapValidator(open_union(UnknownNeonAuthEmailServerConfig))]',
 )
+
+
+class UnknownNeonAuthEmailServerConfigResponse(BaseModel):
+    """A `NeonAuthEmailServerConfigResponse` whose `type` names no branch this SDK knows, kept as received."""
+
+    model_config = ConfigDict(extra="allow")
 
 
 # NeonAuthEmailServerConfigResponse is a union type
 NeonAuthEmailServerConfigResponse = TypeAliasType(
     "NeonAuthEmailServerConfigResponse",
-    "Annotated[StandardEmailServerResponse, WrapValidator(validate_union_candidate)] | Annotated[SharedEmailServer, WrapValidator(validate_union_candidate)]",
+    'Annotated[Annotated[StandardEmailServerResponse, WrapValidator(validate_union_candidate)] | Annotated[SharedEmailServer, WrapValidator(validate_union_candidate)], Field(discriminator="type"), WrapValidator(open_union(UnknownNeonAuthEmailServerConfigResponse))]',
 )
 
 

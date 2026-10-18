@@ -56,6 +56,8 @@ from .shared_part002 import (
     NeonAuthRedirectURIWhitelistDomain,
     NeonAuthUpdateOAuthProviderRequest,
     SharedEmailServer,
+    UnknownNeonAuthEmailServerConfig,
+    UnknownNeonAuthEmailServerConfigResponse,
 )
 
 __all__ = [
@@ -108,6 +110,8 @@ __all__ = [
     "SharedEmailServer",
     "SuspendTimeoutSeconds",
     "TransferProjectsToOrganizationRequest",
+    "UnknownNeonAuthEmailServerConfig",
+    "UnknownNeonAuthEmailServerConfigResponse",
     "VPCEndpointsResponse",
 ]
 

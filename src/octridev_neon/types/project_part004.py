@@ -6,7 +6,7 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
-from octridev_neon.types.branch.models import AnnotationValueData
+from octridev_neon.types.branch_models import AnnotationValueData
 from octridev_neon.types.project_part003 import ProjectSettingsData
 from octridev_neon.types.shared import (
     BillingSubscriptionType,

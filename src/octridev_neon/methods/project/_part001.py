@@ -22,11 +22,13 @@ from octridev_neon.client import (
 from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     AdvisorCategory,
+    CreateProjectResponse,
     GeneralError,
     GetProjectAdvisorSecurityIssuesResponse,
+    ListProjectsResponse,
+    ListSharedProjectsResponse,
     ProjectCreateRequestProject,
     ProjectResponse,
-    ProjectsResponse,
 )
 from octridev_neon.validation import validate_pattern, validate_range
 from octridev_neon.wire import _validate_response_enums, to_wire
@@ -182,7 +184,7 @@ async def list_projects(
     recoverable: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectsResponse:
+) -> ListProjectsResponse:
     """Retrieves a list of projects for the specified organization. If using a personal API
     key, include the `org_id` parameter to specify which organization to work with. If
     using an org API key, `org_id` is automatically inferred from the key. For more
@@ -236,7 +238,7 @@ async def list_projects(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectsResponse"), ProjectsResponse
+            _validate_response_enums(response.data, "ListProjectsResponse"), ListProjectsResponse
         ),
     )
 
@@ -251,7 +253,7 @@ def list_projects_sync(
     recoverable: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectsResponse:
+) -> ListProjectsResponse:
     """Retrieves a list of projects for the specified organization. If using a personal API
     key, include the `org_id` parameter to specify which organization to work with. If
     using an org API key, `org_id` is automatically inferred from the key. For more
@@ -305,7 +307,7 @@ def list_projects_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectsResponse"), ProjectsResponse
+            _validate_response_enums(response.data, "ListProjectsResponse"), ListProjectsResponse
         ),
     )
 
@@ -318,7 +320,7 @@ async def create_project(
     project: ProjectCreateRequestProject,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectResponse:
+) -> CreateProjectResponse:
     """Creates a Neon project within an organization. If using a personal API key, include
     the `org_id` parameter to specify which organization to create the project in. If
     using an org API key, `org_id` is automatically inferred from the key. Plan limits
@@ -354,7 +356,7 @@ async def create_project(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectResponse"), ProjectResponse
+            _validate_response_enums(response.data, "CreateProjectResponse"), CreateProjectResponse
         ),
     )
 
@@ -364,7 +366,7 @@ def create_project_sync(
     project: ProjectCreateRequestProject,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectResponse:
+) -> CreateProjectResponse:
     """Creates a Neon project within an organization. If using a personal API key, include
     the `org_id` parameter to specify which organization to create the project in. If
     using an org API key, `org_id` is automatically inferred from the key. Plan limits
@@ -400,7 +402,7 @@ def create_project_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectResponse"), ProjectResponse
+            _validate_response_enums(response.data, "CreateProjectResponse"), CreateProjectResponse
         ),
     )
 
@@ -416,7 +418,7 @@ async def list_shared_projects(
     timeout: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectsResponse:
+) -> ListSharedProjectsResponse:
     """Retrieves a list of projects shared with your Neon account. For more information,
     see [Manage projects](https://neon.com/docs/manage/projects/).
 
@@ -458,7 +460,8 @@ async def list_shared_projects(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectsResponse"), ProjectsResponse
+            _validate_response_enums(response.data, "ListSharedProjectsResponse"),
+            ListSharedProjectsResponse,
         ),
     )
 
@@ -471,7 +474,7 @@ def list_shared_projects_sync(
     timeout: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectsResponse:
+) -> ListSharedProjectsResponse:
     """Retrieves a list of projects shared with your Neon account. For more information,
     see [Manage projects](https://neon.com/docs/manage/projects/).
 
@@ -513,7 +516,8 @@ def list_shared_projects_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectsResponse"), ProjectsResponse
+            _validate_response_enums(response.data, "ListSharedProjectsResponse"),
+            ListSharedProjectsResponse,
         ),
     )
 

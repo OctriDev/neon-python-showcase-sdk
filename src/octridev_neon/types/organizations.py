@@ -4,6 +4,7 @@
 import importlib
 
 from .organizations_part001 import (
+    ListOrganizationsMembersResponse,
     MemberRole,
     MemberUserInfo,
     MemberWithUser,
@@ -34,6 +35,7 @@ from .organizations_part002 import (
 
 __all__ = [
     "Invitation",
+    "ListOrganizationsMembersResponse",
     "Member",
     "MemberRole",
     "MemberUserInfo",
@@ -90,3 +92,4 @@ MemberWithUser.model_rebuild()
 OrganizationInvitationsResponse.model_rebuild()
 OrganizationInvitesCreateRequest.model_rebuild()
 OrganizationMembersResponse.model_rebuild()
+ListOrganizationsMembersResponse.model_rebuild()

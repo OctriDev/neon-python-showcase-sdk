@@ -22,11 +22,11 @@ from octridev_neon.client import (
 from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     BackupSchedule,
-    BranchResponse,
     CreateSnapshotResponse,
     GeneralError,
     ListSnapshotsResponse,
     OperationsResponse,
+    RestoreSnapshotResponse,
     SnapshotUpdateRequestSnapshot,
     UpdateSnapshotResponse,
 )
@@ -443,7 +443,7 @@ async def restore_snapshot(
     finalize_restore: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> RestoreSnapshotResponse:
     """Restores the specified snapshot to a new branch, and optionally finalizes the
     restore operation to replace the original branch.
 
@@ -493,7 +493,8 @@ async def restore_snapshot(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "RestoreSnapshotResponse"),
+            RestoreSnapshotResponse,
         ),
     )
 
@@ -508,7 +509,7 @@ def restore_snapshot_sync(
     finalize_restore: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> RestoreSnapshotResponse:
     """Restores the specified snapshot to a new branch, and optionally finalizes the
     restore operation to replace the original branch.
 
@@ -558,7 +559,8 @@ def restore_snapshot_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "RestoreSnapshotResponse"),
+            RestoreSnapshotResponse,
         ),
     )
 

@@ -22,8 +22,8 @@ from octridev_neon.client import (
 from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     CustomDomain,
-    CustomDomainsListResponse,
     GeneralError,
+    ListFunctionsCustomDomainsResponse,
     TriggerID,
     TriggerResponse,
     TriggerUpdateRequest,
@@ -410,7 +410,7 @@ async def list_functions_custom_domains(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> CustomDomainsListResponse:
+) -> ListFunctionsCustomDomainsResponse:
     """Lists all custom domains registered on the branch, across every target entity.
     **Note**: This endpoint is currently in Beta.
 
@@ -443,8 +443,8 @@ async def list_functions_custom_domains(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "CustomDomainsListResponse"),
-            CustomDomainsListResponse,
+            _validate_response_enums(response.data, "ListFunctionsCustomDomainsResponse"),
+            ListFunctionsCustomDomainsResponse,
         ),
     )
 
@@ -457,7 +457,7 @@ def list_functions_custom_domains_sync(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> CustomDomainsListResponse:
+) -> ListFunctionsCustomDomainsResponse:
     """Lists all custom domains registered on the branch, across every target entity.
     **Note**: This endpoint is currently in Beta.
 
@@ -490,8 +490,8 @@ def list_functions_custom_domains_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "CustomDomainsListResponse"),
-            CustomDomainsListResponse,
+            _validate_response_enums(response.data, "ListFunctionsCustomDomainsResponse"),
+            ListFunctionsCustomDomainsResponse,
         ),
     )
 

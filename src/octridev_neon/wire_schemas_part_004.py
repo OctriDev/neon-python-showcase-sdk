@@ -173,6 +173,7 @@ WIRE_SCHEMAS_PART_4: dict[str, tuple[Any, dict[str, tuple[str, str | None]]]] = 
         {
             "sender_email": ("sender_email", None),
             "sender_name": ("sender_name", None),
+            "type": ("type", None),
         },
     ),
     "StandardEmailServer": (
@@ -184,6 +185,7 @@ WIRE_SCHEMAS_PART_4: dict[str, tuple[Any, dict[str, tuple[str, str | None]]]] = 
             "password": ("password", None),
             "sender_email": ("sender_email", None),
             "sender_name": ("sender_name", None),
+            "type": ("type", None),
         },
     ),
     "StandardEmailServerResponse": (
@@ -195,6 +197,7 @@ WIRE_SCHEMAS_PART_4: dict[str, tuple[Any, dict[str, tuple[str, str | None]]]] = 
             "password": ("password", None),
             "sender_email": ("sender_email", None),
             "sender_name": ("sender_name", None),
+            "type": ("type", None),
         },
     ),
     "SendNeonAuthTestEmailRequest": (

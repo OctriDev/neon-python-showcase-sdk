@@ -9,6 +9,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
+from octridev_neon.types.shared_pagination import Pagination
 
 from ..validation import (
     read_date_time,
@@ -327,3 +328,66 @@ ConsumptionHistoryGranularity = Literal["hourly", "daily", "monthly"] | str
 
 
 ConsumptionHistoryQueryMetrics = list[str]
+
+
+class GetConsumptionHistoryPerProjectResponse(BaseModel):
+    """Typed representation of the `GetConsumptionHistoryPerProjectResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    projects: list[ConsumptionHistoryPerProject]
+    """Per-project consumption history records included in the response."""
+    pagination: Pagination | NotGiven = NOT_GIVEN
+    """
+    Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+
+    @example {"cursor":"2022-12-07T00:45:05.262011Z"}
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["projects"])
+        return value
+
+
+class GetConsumptionHistoryPerProjectV2Response(BaseModel):
+    """Typed representation of the `GetConsumptionHistoryPerProjectV2Response` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    projects: list[ConsumptionHistoryPerProjectV2]
+    """Per-project consumption history entries for the requested time range."""
+    pagination: Pagination | NotGiven = NOT_GIVEN
+    """
+    Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+
+    @example {"cursor":"2022-12-07T00:45:05.262011Z"}
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["projects"])
+        return value
+
+
+class GetConsumptionHistoryPerBranchV2Response(BaseModel):
+    """Typed representation of the `GetConsumptionHistoryPerBranchV2Response` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    branches: list[ConsumptionHistoryPerBranchV2]
+    """Per-branch consumption history records returned for the requested time range."""
+    pagination: Pagination | NotGiven = NOT_GIVEN
+    """
+    Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+
+    @example {"cursor":"2022-12-07T00:45:05.262011Z"}
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["branches"])
+        return value

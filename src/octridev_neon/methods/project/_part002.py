@@ -28,6 +28,7 @@ from octridev_neon.types import (
     ProjectRecoverResponse,
     ProjectResponse,
     ProjectUpdateRequestProject,
+    UpdateProjectResponse,
 )
 from octridev_neon.validation import (
     validate_email,
@@ -73,7 +74,7 @@ async def update_project(
     project: ProjectUpdateRequestProject,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectResponse:
+) -> UpdateProjectResponse:
     """Updates configurable properties of a Neon project, including its name, project
     settings, default endpoint settings, and history retention period. Supply the
     required `project` object and include only the properties you want to change. The
@@ -110,7 +111,7 @@ async def update_project(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectResponse"), ProjectResponse
+            _validate_response_enums(response.data, "UpdateProjectResponse"), UpdateProjectResponse
         ),
     )
 
@@ -121,7 +122,7 @@ def update_project_sync(
     project: ProjectUpdateRequestProject,
     *,
     request_options: RequestOptions | None = None,
-) -> ProjectResponse:
+) -> UpdateProjectResponse:
     """Updates configurable properties of a Neon project, including its name, project
     settings, default endpoint settings, and history retention period. Supply the
     required `project` object and include only the properties you want to change. The
@@ -158,7 +159,7 @@ def update_project_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ProjectResponse"), ProjectResponse
+            _validate_response_enums(response.data, "UpdateProjectResponse"), UpdateProjectResponse
         ),
     )
 

@@ -3,11 +3,13 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict, model_validator
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
 
-from ..validation import validate_required
+from ..validation import validate_enum, validate_required
 
 
 class StandardEmailServer(BaseModel):
@@ -27,10 +29,20 @@ class StandardEmailServer(BaseModel):
     """Email address used as the From address on outgoing auth emails."""
     sender_name: str | NotGiven = NOT_GIVEN
     """Display name shown as the sender in outgoing emails."""
+    type: Literal["standard"]
+    """Optional enumerated value serialized in the `type` wire field."""
+
+    @field_validator("type")
+    @classmethod
+    def _validate_type(cls, value):
+        validate_enum("type", value, ["standard"])
+        return value
 
 
 class StandardEmailServerResponse(BaseModel):
     """Typed representation of the `StandardEmailServerResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
 
     host: str
     """Hostname of the email server."""
@@ -44,6 +56,8 @@ class StandardEmailServerResponse(BaseModel):
     """Email address used as the From address on outgoing auth emails."""
     sender_name: str
     """Display name shown as the sender in outgoing emails."""
+    type: Literal["standard"]
+    """Optional enumerated value serialized in the `type` wire field."""
 
     @model_validator(mode="before")
     @classmethod
@@ -51,4 +65,10 @@ class StandardEmailServerResponse(BaseModel):
         validate_required(
             value, ["host", "port", "username", "password", "sender_email", "sender_name"]
         )
+        return value
+
+    @field_validator("type")
+    @classmethod
+    def _validate_type(cls, value):
+        validate_enum("type", value, ["standard"])
         return value

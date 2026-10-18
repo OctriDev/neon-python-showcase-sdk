@@ -79,6 +79,126 @@ WIRE_SCHEMAS_PART_6: dict[str, tuple[Any, dict[str, tuple[str, str | None]]]] = 
             "operations": ("operations", "Operation"),
         },
     ),
+    "ListProjectsResponse": (
+        None,
+        {
+            "projects": ("projects", "ProjectListItem"),
+            "unavailable_project_ids": ("unavailable_project_ids", None),
+            "pagination": ("pagination", "Pagination"),
+            "applications": ("applications", None),
+            "integrations": ("integrations", None),
+        },
+    ),
+    "CreateProjectResponse": (
+        None,
+        {
+            "project": ("project", "Project"),
+            "connection_uris": ("connection_uris", "ConnectionDetails"),
+            "roles": ("roles", "Role"),
+            "databases": ("databases", "Database"),
+            "operations": ("operations", "Operation"),
+            "branch": ("branch", "Branch"),
+            "endpoints": ("endpoints", "Endpoint"),
+        },
+    ),
+    "ListSharedProjectsResponse": (
+        None,
+        {
+            "projects": ("projects", "ProjectListItem"),
+            "unavailable_project_ids": ("unavailable_project_ids", None),
+            "pagination": ("pagination", "Pagination"),
+        },
+    ),
+    "UpdateProjectResponse": (
+        None,
+        {
+            "project": ("project", "Project"),
+            "operations": ("operations", "Operation"),
+        },
+    ),
+    "ListOperationResponse": (
+        None,
+        {
+            "operations": ("operations", "Operation"),
+            "pagination": ("pagination", "Pagination"),
+        },
+    ),
+    "ListBranchResponse": (
+        None,
+        {
+            "branches": ("branches", "Branch"),
+            "annotations": ("annotations", "map:AnnotationData"),
+            "pagination": ("pagination", "CursorPagination"),
+        },
+    ),
+    "CreateBranchResponse": (
+        None,
+        {
+            "branch": ("branch", "Branch"),
+            "endpoints": ("endpoints", "Endpoint"),
+            "operations": ("operations", "Operation"),
+            "roles": ("roles", "Role"),
+            "databases": ("databases", "Database"),
+            "connection_uris": ("connection_uris", "ConnectionDetails"),
+        },
+    ),
+    "GetBranchResponse": (
+        None,
+        {
+            "branch": ("branch", "Branch"),
+            "annotation": ("annotation", "AnnotationData"),
+        },
+    ),
+    "GetConsumptionHistoryPerProjectResponse": (
+        None,
+        {
+            "projects": ("projects", "ConsumptionHistoryPerProject"),
+            "pagination": ("pagination", "Pagination"),
+        },
+    ),
+    "GetConsumptionHistoryPerProjectV2Response": (
+        None,
+        {
+            "projects": ("projects", "ConsumptionHistoryPerProjectV2"),
+            "pagination": ("pagination", "Pagination"),
+        },
+    ),
+    "GetConsumptionHistoryPerBranchV2Response": (
+        None,
+        {
+            "branches": ("branches", "ConsumptionHistoryPerBranchV2"),
+            "pagination": ("pagination", "Pagination"),
+        },
+    ),
+    "ListOrganizationsMembersResponse": (
+        None,
+        {
+            "members": ("members", "MemberWithUser"),
+            "pagination": ("pagination", "CursorPagination"),
+        },
+    ),
+    "RestoreSnapshotResponse": (
+        None,
+        {
+            "branch": ("branch", "Branch"),
+            "endpoints": ("endpoints", "Endpoint"),
+            "operations": ("operations", "Operation"),
+        },
+    ),
+    "ListFunctionsResponse": (
+        None,
+        {
+            "functions": ("functions", "NeonFunction"),
+            "pagination": ("pagination", "CursorPagination"),
+        },
+    ),
+    "ListFunctionsCustomDomainsResponse": (
+        None,
+        {
+            "custom_domains": ("custom_domains", "CustomDomain"),
+            "pagination": ("pagination", "CursorPagination"),
+        },
+    ),
     "OrgApiKeyCreateRequestVariant1": (
         None,
         {

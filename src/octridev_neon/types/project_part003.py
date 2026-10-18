@@ -11,13 +11,14 @@ from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 from octridev_neon.client import NOT_GIVEN, NotGiven
 from octridev_neon.types.project_part001 import (
     AllowedIps,
+    MaintenanceWindow,
     ProjectAuditLogLevel,
     ProjectMemberGrantSource,
     ProjectMemberOrgRole,
     ProjectPermissionLevel,
     ProjectRole,
 )
-from octridev_neon.types.project_part002 import MaintenanceWindow, ProjectQuota
+from octridev_neon.types.project_part002 import ProjectQuota
 from octridev_neon.types.shared import PreloadLibraries
 
 from ..validation import (

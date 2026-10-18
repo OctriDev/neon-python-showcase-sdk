@@ -36,6 +36,20 @@ _WIRE_LIST_ALIASES: dict[str, str] = {}
 
 
 _RESPONSE_ENUM_SCHEMAS: dict[str, object] = {
+    "NeonAuthPluginConfigs": {
+        "properties": {"email_provider": {"ref": "NeonAuthEmailServerConfigResponse"}}
+    },
+    "SharedEmailServer": {"properties": {"type": {"enum": ["shared"]}}},
+    "StandardEmailServer": {"properties": {"type": {"enum": ["standard"]}}},
+    "StandardEmailServerResponse": {"properties": {"type": {"enum": ["standard"]}}},
+    "NeonAuthEmailServerConfig": {
+        "oneOf": [{"ref": "StandardEmailServer"}, {"ref": "SharedEmailServer"}],
+        "openTag": ["type", ["standard", "shared"]],
+    },
+    "NeonAuthEmailServerConfigResponse": {
+        "oneOf": [{"ref": "StandardEmailServerResponse"}, {"ref": "SharedEmailServer"}],
+        "openTag": ["type", ["standard", "shared"]],
+    },
     "TriggerCreateRequest": {
         "oneOf": [
             {"ref": "ScheduleTriggerCreateRequest"},

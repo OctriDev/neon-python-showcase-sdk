@@ -1888,11 +1888,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/BranchesCountResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "BranchesCountResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -3362,11 +3362,11 @@
           "statusCode": "201",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/CreateBranchResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "CreateBranchResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -3488,11 +3488,11 @@
           "statusCode": "201",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/CreateBranchResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "CreateBranchResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -5521,11 +5521,11 @@
           "statusCode": "201",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/CreateProjectResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "CreateProjectResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -11327,11 +11327,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/GetBranchResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "GetBranchResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -12413,11 +12413,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/GetConsumptionHistoryPerBranchV2Response",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "GetConsumptionHistoryPerBranchV2Response",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -12742,11 +12742,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/GetConsumptionHistoryPerProjectResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "GetConsumptionHistoryPerProjectResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -13071,11 +13071,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/GetConsumptionHistoryPerProjectV2Response",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "GetConsumptionHistoryPerProjectV2Response",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -16181,11 +16181,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListBranchResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListBranchResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -17235,11 +17235,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListFunctionsResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListFunctionsResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -17386,11 +17386,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListFunctionsCustomDomainsResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListFunctionsCustomDomainsResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -18041,11 +18041,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListOperationResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListOperationResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -18348,11 +18348,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListOrganizationsMembersResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListOrganizationsMembersResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -18927,11 +18927,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListProjectsResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListProjectsResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -19207,11 +19207,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/ListSharedProjectsResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "ListSharedProjectsResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -21378,11 +21378,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/RestoreSnapshotResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "RestoreSnapshotResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -28991,11 +28991,11 @@
           "statusCode": "200",
           "mediaType": "application/json",
           "decoderKind": "json",
-          "schemaRef": null,
+          "schemaRef": "#/components/schemas/UpdateProjectResponse",
           "schemaType": {
-            "type": "any",
+            "type": "ref",
             "format": null,
-            "ref": null,
+            "ref": "UpdateProjectResponse",
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -33388,6 +33388,128 @@
       "values": []
     },
     {
+      "name": "CreateBranchResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "branch",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Branch",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "connection_uris",
+          "required": false,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ConnectionDetails",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "databases",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Database",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "endpoints",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Endpoint",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "operations",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Operation",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "roles",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Role",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
       "name": "CreateCredentialRequest",
       "kind": "object",
       "type": {
@@ -33561,6 +33683,139 @@
           "ref": null,
           "nullable": false,
           "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "CreateProjectResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "branch",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Branch",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "connection_uris",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ConnectionDetails",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "databases",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Database",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "endpoints",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Endpoint",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "operations",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Operation",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "project",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Project",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "roles",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Role",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
           "mapValue": null,
           "variants": null
         }
@@ -34506,9 +34761,9 @@
         {
           "name": "settings",
           "required": false,
-          "type": "object",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "DataAPISettings",
           "nullable": true,
           "items": null,
           "mapValue": null,
@@ -35849,6 +36104,182 @@
       "values": []
     },
     {
+      "name": "GetBranchResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "annotation",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "AnnotationData",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "branch",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Branch",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "GetConsumptionHistoryPerBranchV2Response",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "branches",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ConsumptionHistoryPerBranchV2",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "GetConsumptionHistoryPerProjectResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "projects",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ConsumptionHistoryPerProject",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "GetConsumptionHistoryPerProjectV2Response",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "projects",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ConsumptionHistoryPerProjectV2",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
       "name": "GetProjectAdvisorSecurityIssuesResponse",
       "kind": "object",
       "type": {
@@ -36268,6 +36699,71 @@
       "values": []
     },
     {
+      "name": "ListBranchResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "annotations",
+          "required": true,
+          "type": "object",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": {
+            "type": "ref",
+            "format": null,
+            "ref": "AnnotationData",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "variants": null
+        },
+        {
+          "name": "branches",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Branch",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "CursorPagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
       "name": "ListCredentialsResponse",
       "kind": "object",
       "type": {
@@ -36296,6 +36792,98 @@
             "mapValue": null,
             "variants": null
           },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListFunctionsCustomDomainsResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "custom_domains",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "CustomDomain",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "CursorPagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListFunctionsResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "functions",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "NeonFunction",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "CursorPagination",
+          "nullable": false,
+          "items": null,
           "mapValue": null,
           "variants": null
         }
@@ -36396,6 +36984,282 @@
             "type": "ref",
             "format": null,
             "ref": "NeonAuthOauthProvider",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListOperationResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "operations",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Operation",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListOrganizationsMembersResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "members",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "MemberWithUser",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "CursorPagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListProjectsResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "applications",
+          "required": true,
+          "type": "object",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": {
+            "type": "array",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": {
+              "type": "ref",
+              "format": null,
+              "ref": "ApplicationType",
+              "nullable": false,
+              "items": null,
+              "mapValue": null,
+              "variants": null
+            },
+            "mapValue": null,
+            "variants": null
+          },
+          "variants": null
+        },
+        {
+          "name": "integrations",
+          "required": true,
+          "type": "object",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": {
+            "type": "array",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": {
+              "type": "ref",
+              "format": null,
+              "ref": "ApplicationType",
+              "nullable": false,
+              "items": null,
+              "mapValue": null,
+              "variants": null
+            },
+            "mapValue": null,
+            "variants": null
+          },
+          "variants": null
+        },
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "projects",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ProjectListItem",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "unavailable_project_ids",
+          "required": false,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "ListSharedProjectsResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "pagination",
+          "required": false,
+          "type": "ref",
+          "format": null,
+          "ref": "Pagination",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "projects",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "ProjectListItem",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "unavailable_project_ids",
+          "required": false,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "string",
+            "format": null,
+            "ref": null,
             "nullable": false,
             "items": null,
             "mapValue": null,
@@ -39393,9 +40257,9 @@
         {
           "name": "active_deployment",
           "required": false,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "NeonFunctionDeployment",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -39415,9 +40279,9 @@
         {
           "name": "current_deployment",
           "required": false,
-          "type": "any",
+          "type": "ref",
           "format": null,
-          "ref": null,
+          "ref": "NeonFunctionDeployment",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -43781,6 +44645,71 @@
       "values": []
     },
     {
+      "name": "RestoreSnapshotResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "branch",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Branch",
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "endpoints",
+          "required": false,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Endpoint",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "operations",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Operation",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
       "name": "Role",
       "kind": "object",
       "type": {
@@ -44678,6 +45607,17 @@
           "items": null,
           "mapValue": null,
           "variants": null
+        },
+        {
+          "name": "type",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
         }
       ],
       "values": []
@@ -44958,6 +45898,17 @@
           "variants": null
         },
         {
+          "name": "type",
+          "required": false,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
           "name": "username",
           "required": false,
           "type": "string",
@@ -45031,6 +45982,17 @@
         {
           "name": "sender_name",
           "required": true,
+          "type": "string",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "type",
+          "required": false,
           "type": "string",
           "format": null,
           "ref": null,
@@ -45691,6 +46653,52 @@
           "type": "string",
           "format": null,
           "ref": null,
+          "nullable": false,
+          "items": null,
+          "mapValue": null,
+          "variants": null
+        }
+      ],
+      "values": []
+    },
+    {
+      "name": "UpdateProjectResponse",
+      "kind": "object",
+      "type": {
+        "type": "any",
+        "format": null,
+        "ref": null,
+        "nullable": false,
+        "items": null,
+        "mapValue": null,
+        "variants": null
+      },
+      "properties": [
+        {
+          "name": "operations",
+          "required": true,
+          "type": "array",
+          "format": null,
+          "ref": null,
+          "nullable": false,
+          "items": {
+            "type": "ref",
+            "format": null,
+            "ref": "Operation",
+            "nullable": false,
+            "items": null,
+            "mapValue": null,
+            "variants": null
+          },
+          "mapValue": null,
+          "variants": null
+        },
+        {
+          "name": "project",
+          "required": true,
+          "type": "ref",
+          "format": null,
+          "ref": "Project",
           "nullable": false,
           "items": null,
           "mapValue": null,
@@ -52339,6 +53347,13 @@
         ]
       },
       {
+        "name": "CreateBranchResponse",
+        "kind": "model",
+        "description": "Typed representation of the `CreateBranchResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "CreateCredentialRequest",
         "kind": "model",
         "description": "Typed representation of the `CreateCredentialRequest` API schema.",
@@ -52401,6 +53416,13 @@
             "description": "When the credential expires; absent means never expires."
           }
         ]
+      },
+      {
+        "name": "CreateProjectResponse",
+        "kind": "model",
+        "description": "Typed representation of the `CreateProjectResponse` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "CredentialMeta",
@@ -53261,6 +54283,34 @@
         ]
       },
       {
+        "name": "GetBranchResponse",
+        "kind": "model",
+        "description": "Typed representation of the `GetBranchResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "GetConsumptionHistoryPerBranchV2Response",
+        "kind": "model",
+        "description": "Typed representation of the `GetConsumptionHistoryPerBranchV2Response` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "GetConsumptionHistoryPerProjectResponse",
+        "kind": "model",
+        "description": "Typed representation of the `GetConsumptionHistoryPerProjectResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "GetConsumptionHistoryPerProjectV2Response",
+        "kind": "model",
+        "description": "Typed representation of the `GetConsumptionHistoryPerProjectV2Response` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "GrantedCredentialScope",
         "kind": "enum",
         "description": "A single capability a credential actually carries, as reported by responses that describe an existing credential. This set is a superset of `CredentialScope` (the requestable set) because a credential's scopes are not limited to what this API offers: the platform accepts additional scopes for customer-managed (`user`) credentials, so one may exist on your branch that was not issued through this endpoint. Responses must be able to report such a credential rather than fail to describe it — a client that rejected the value would, on rotate, discard the replacement secret after the rotation had already committed. Treat unknown values as opaque.",
@@ -53408,6 +54458,13 @@
         ]
       },
       {
+        "name": "ListBranchResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListBranchResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "ListCredentialsResponse",
         "kind": "model",
         "description": "Typed representation of the `ListCredentialsResponse` API schema.",
@@ -53418,6 +54475,20 @@
             "description": "Required array value serialized in the `credentials` wire field."
           }
         ]
+      },
+      {
+        "name": "ListFunctionsCustomDomainsResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListFunctionsCustomDomainsResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "ListFunctionsResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListFunctionsResponse` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "ListNeonAuthIntegrationsResponse",
@@ -53454,6 +54525,34 @@
             "description": "OAuth providers configured for Neon Auth on the project."
           }
         ]
+      },
+      {
+        "name": "ListOperationResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListOperationResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "ListOrganizationsMembersResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListOrganizationsMembersResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "ListProjectsResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListProjectsResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
+        "name": "ListSharedProjectsResponse",
+        "kind": "model",
+        "description": "Typed representation of the `ListSharedProjectsResponse` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "MaintenanceWindow",
@@ -56172,6 +57271,13 @@
         ]
       },
       {
+        "name": "RestoreSnapshotResponse",
+        "kind": "model",
+        "description": "Typed representation of the `RestoreSnapshotResponse` API schema.",
+        "values": [],
+        "properties": []
+      },
+      {
         "name": "Role",
         "kind": "model",
         "description": "Typed representation of the `Role` API schema.",
@@ -56511,6 +57617,10 @@
           {
             "name": "sender_name",
             "description": "Display name shown as the sender in outgoing emails."
+          },
+          {
+            "name": "type",
+            "description": "Optional enumerated value serialized in the `type` wire field."
           }
         ]
       },
@@ -56627,6 +57737,10 @@
           {
             "name": "sender_name",
             "description": "Display name shown as the sender in outgoing emails."
+          },
+          {
+            "name": "type",
+            "description": "Optional enumerated value serialized in the `type` wire field."
           }
         ]
       },
@@ -56659,6 +57773,10 @@
           {
             "name": "sender_name",
             "description": "Display name shown as the sender in outgoing emails."
+          },
+          {
+            "name": "type",
+            "description": "Optional enumerated value serialized in the `type` wire field."
           }
         ]
       },
@@ -56880,6 +57998,13 @@
             "description": "ID of the updated user"
           }
         ]
+      },
+      {
+        "name": "UpdateProjectResponse",
+        "kind": "model",
+        "description": "Typed representation of the `UpdateProjectResponse` API schema.",
+        "values": [],
+        "properties": []
       },
       {
         "name": "VPCEndpoint",

@@ -6,10 +6,12 @@ from __future__ import annotations
 from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
+from octridev_neon.types.branch_models import AnnotationData, AnnotationValueData
 from octridev_neon.types.branch_part001 import BranchCreateRequest, MaskingRule
-from octridev_neon.types.branch.models import AnnotationValueData
 from octridev_neon.types.shared import Database, Endpoint, EndpointSettingsData, EndpointType, Role
 from octridev_neon.types.shared_branch import Branch
+from octridev_neon.types.shared_connection import ConnectionDetails
+from octridev_neon.types.shared_cursor import CursorPagination
 from octridev_neon.types.shared_operation import Operation
 
 from ..validation import validate_items, validate_range, validate_required
@@ -234,6 +236,73 @@ class BranchSchemaJSON(BaseModel):
     @classmethod
     def _validate_required(cls, value):
         validate_required(value, ["tables"])
+        return value
+
+
+class ListBranchResponse(BaseModel):
+    """Typed representation of the `ListBranchResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    branches: list[Branch]
+    """Branches in the project. Each includes `id`, `name`, `current_state`, and `created_at`."""
+    annotations: dict[str, AnnotationData]
+    """Map of annotations keyed by resource identifier, where each value contains the annotation data for that resource."""
+    pagination: CursorPagination | NotGiven = NOT_GIVEN
+    """To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["branches", "annotations"])
+        return value
+
+
+class CreateBranchResponse(BaseModel):
+    """Typed representation of the `CreateBranchResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    branch: Branch
+    """
+    Branch returned by the request.
+
+    @example {"id":"br-wispy-meadow-118737","project_id":"spring-example-302709","parent_id":"br-aged-salad-637688","parent_lsn":"0/1DE2850","name":"dev2","protected":false,"current_state":"ready","state_changed_at":"2022-11-30T20:09:48Z","creation_source":"console","created_at":"2022-11-30T19:09:48Z","updated_at":"2022-12-01T19:53:05Z","default":true,"init_source":"parent-data","data_transfer_bytes":72911987,"written_data_bytes":542998300,"compute_time_seconds":823880990,"active_time_seconds":922200,"cpu_used_sec":461100}
+    """
+    endpoints: list[Endpoint]
+    """Compute endpoints in the project. Each includes `id`, `branch_id`, `host`, and `type`."""
+    operations: list[Operation]
+    """Required array value serialized in the `operations` wire field."""
+    roles: list[Role]
+    """Roles belonging to the branch. Each role includes fields such as `branch_id`, `name`, `protected`, `created_at`, and `updated_at`."""
+    databases: list[Database]
+    """Databases on the branch. Each includes `id`, `name`, `owner_name`, and `created_at`."""
+    connection_uris: list[ConnectionDetails] | NotGiven = NOT_GIVEN
+    """Connection URIs for the compute endpoint, including credentials."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["branch", "endpoints", "operations", "roles", "databases"])
+        return value
+
+
+class GetBranchResponse(BaseModel):
+    """Typed representation of the `GetBranchResponse` API schema."""
+
+    branch: Branch
+    """
+    Branch returned by the request.
+
+    @example {"id":"br-wispy-meadow-118737","project_id":"spring-example-302709","parent_id":"br-aged-salad-637688","parent_lsn":"0/1DE2850","name":"dev2","protected":false,"current_state":"ready","state_changed_at":"2022-11-30T20:09:48Z","creation_source":"console","created_at":"2022-11-30T19:09:48Z","updated_at":"2022-12-01T19:53:05Z","default":true,"init_source":"parent-data","data_transfer_bytes":72911987,"written_data_bytes":542998300,"compute_time_seconds":823880990,"active_time_seconds":922200,"cpu_used_sec":461100}
+    """
+    annotation: AnnotationData
+    """Annotation data associated with the annotated object."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["branch", "annotation"])
         return value
 
 

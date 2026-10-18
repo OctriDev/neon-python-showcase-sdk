@@ -21,9 +21,9 @@ from octridev_neon.client import (
 from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     ConsumptionHistoryGranularity,
-    ConsumptionHistoryPerBranchV2Response,
     ConsumptionHistoryQueryMetrics,
     GeneralError,
+    GetConsumptionHistoryPerBranchV2Response,
 )
 from octridev_neon.validation import (
     validate_date_time,
@@ -76,7 +76,7 @@ async def get_consumption_history_per_branch_v2(
     branch_ids: list[str] | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerBranchV2Response:
+) -> GetConsumptionHistoryPerBranchV2Response:
     """Returns consumption metrics for each branch across one or more projects listed in
     `project_ids` (1 to 100 projects). Available for accounts on paid usage-based
     Launch, Scale, Agent, and Enterprise plans. History starts when the account first
@@ -180,8 +180,8 @@ async def get_consumption_history_per_branch_v2(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerBranchV2Response"),
-            ConsumptionHistoryPerBranchV2Response,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerBranchV2Response"),
+            GetConsumptionHistoryPerBranchV2Response,
         ),
     )
 
@@ -199,7 +199,7 @@ def get_consumption_history_per_branch_v2_sync(
     branch_ids: list[str] | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerBranchV2Response:
+) -> GetConsumptionHistoryPerBranchV2Response:
     """Returns consumption metrics for each branch across one or more projects listed in
     `project_ids` (1 to 100 projects). Available for accounts on paid usage-based
     Launch, Scale, Agent, and Enterprise plans. History starts when the account first
@@ -303,8 +303,8 @@ def get_consumption_history_per_branch_v2_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerBranchV2Response"),
-            ConsumptionHistoryPerBranchV2Response,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerBranchV2Response"),
+            GetConsumptionHistoryPerBranchV2Response,
         ),
     )
 
