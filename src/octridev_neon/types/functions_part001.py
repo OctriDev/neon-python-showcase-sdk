@@ -9,10 +9,10 @@ from pydantic import BaseModel, ConfigDict, Field, WrapValidator, field_validato
 from typing_extensions import TypeAliasType
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
+from octridev_neon.types.shared_cursor import CursorPagination
 
 from ..validation import (
     open_union,
-    validate_enum,
     validate_length,
     validate_pattern,
     validate_required,
@@ -22,6 +22,7 @@ from ..validation import (
 if TYPE_CHECKING:
     from octridev_neon.types.functions_part002 import (
         ScheduleTrigger,
+        ScheduleTriggerCreateRequest,
         ScheduleTriggerUpdateRequest,
         StorageObjectCreatedTrigger,
         StorageObjectCreatedTriggerCreateRequest,
@@ -445,50 +446,35 @@ class FunctionDeployRequest(BaseModel):
     """
 
 
-class ScheduleTriggerCreateRequest(BaseModel):
-    """Typed representation of the `ScheduleTriggerCreateRequest` API schema."""
+class ListFunctionsResponse(BaseModel):
+    """Typed representation of the `ListFunctionsResponse` API schema."""
 
     model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
 
-    type: Literal["schedule"]
-    """Trigger type discriminator."""
-    function_slug: str
-    """The branch-local Function slug to invoke."""
-    name: str
-    """Human-readable name, unique among triggers visible on the branch."""
-    schedule: FunctionTriggerSchedule
-    """A numeric five-field cron schedule interpreted in UTC."""
-    function_path: str | NotGiven = NOT_GIVEN
-    """Path passed to the target Function. Defaults to `/`."""
-    enabled: bool | NotGiven = NOT_GIVEN
-    """Whether future occurrences should be scheduled."""
+    functions: list[NeonFunction]
+    """Required array value serialized in the `functions` wire field."""
+    pagination: CursorPagination | NotGiven = NOT_GIVEN
+    """To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor."""
 
     @model_validator(mode="before")
     @classmethod
     def _validate_required(cls, value):
-        validate_required(value, ["type", "function_slug", "name", "schedule"])
+        validate_required(value, ["functions"])
         return value
 
-    @field_validator("type")
-    @classmethod
-    def _validate_type(cls, value):
-        validate_enum("type", value, ["schedule"])
-        return value
 
-    @field_validator("function_slug")
-    @classmethod
-    def _validate_function_slug(cls, value):
-        validate_pattern("function_slug", value, "^[a-z0-9]{1,20}$")
-        return value
+class ListFunctionsCustomDomainsResponse(BaseModel):
+    """Typed representation of the `ListFunctionsCustomDomainsResponse` API schema."""
 
-    @field_validator("name")
-    @classmethod
-    def _validate_name(cls, value):
-        validate_length("name", value, min=1, max=256)
-        return value
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
 
-    @field_validator("function_path")
+    custom_domains: list[CustomDomain]
+    """Required array value serialized in the `custom_domains` wire field."""
+    pagination: CursorPagination | NotGiven = NOT_GIVEN
+    """To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor."""
+
+    @model_validator(mode="before")
     @classmethod
-    def _validate_function_path(cls, value):
-        validate_length("function_path", value, min=1, max=2048)
+    def _validate_required(cls, value):
+        validate_required(value, ["custom_domains"])
         return value

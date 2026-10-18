@@ -19,7 +19,7 @@ from octridev_neon.client import (
     serialize_query,
 )
 from octridev_neon.errors import SdkValidationError, sdk_decode
-from octridev_neon.types import GeneralError, OperationResponse, OperationsResponse
+from octridev_neon.types import GeneralError, ListOperationResponse, OperationResponse
 from octridev_neon.validation import validate_pattern, validate_range, validate_uuid
 from octridev_neon.wire import _validate_response_enums
 
@@ -135,7 +135,7 @@ async def list_operation(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> OperationsResponse:
+) -> ListOperationResponse:
     """Retrieves a list of operations for the specified Neon project. The number of
     operations returned can be large. To paginate the response, issue an initial request
     with a `limit` value. Then, add the `cursor` value that was returned in the response
@@ -167,7 +167,7 @@ async def list_operation(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "OperationsResponse"), OperationsResponse
+            _validate_response_enums(response.data, "ListOperationResponse"), ListOperationResponse
         ),
     )
 
@@ -179,7 +179,7 @@ def list_operation_sync(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> OperationsResponse:
+) -> ListOperationResponse:
     """Retrieves a list of operations for the specified Neon project. The number of
     operations returned can be large. To paginate the response, issue an initial request
     with a `limit` value. Then, add the `cursor` value that was returned in the response
@@ -211,7 +211,7 @@ def list_operation_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "OperationsResponse"), OperationsResponse
+            _validate_response_enums(response.data, "ListOperationResponse"), ListOperationResponse
         ),
     )
 

@@ -20,7 +20,7 @@ from octridev_neon.client import (
     serialize_query,
 )
 from octridev_neon.errors import SdkValidationError, sdk_decode
-from octridev_neon.types import GeneralError, NeonFunctionResponse, NeonFunctionsListResponse
+from octridev_neon.types import GeneralError, ListFunctionsResponse, NeonFunctionResponse
 from octridev_neon.validation import validate_length, validate_pattern, validate_range
 from octridev_neon.wire import _validate_response_enums, to_wire
 
@@ -62,7 +62,7 @@ async def list_functions(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> NeonFunctionsListResponse:
+) -> ListFunctionsResponse:
     """Lists functions on the specified branch. **Note**: This endpoint is currently in
     Beta.
 
@@ -95,8 +95,7 @@ async def list_functions(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "NeonFunctionsListResponse"),
-            NeonFunctionsListResponse,
+            _validate_response_enums(response.data, "ListFunctionsResponse"), ListFunctionsResponse
         ),
     )
 
@@ -109,7 +108,7 @@ def list_functions_sync(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> NeonFunctionsListResponse:
+) -> ListFunctionsResponse:
     """Lists functions on the specified branch. **Note**: This endpoint is currently in
     Beta.
 
@@ -142,8 +141,7 @@ def list_functions_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "NeonFunctionsListResponse"),
-            NeonFunctionsListResponse,
+            _validate_response_enums(response.data, "ListFunctionsResponse"), ListFunctionsResponse
         ),
     )
 

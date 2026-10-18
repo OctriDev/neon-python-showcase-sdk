@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
 from octridev_neon.types.shared_api import ApiKeyCreatorData
+from octridev_neon.types.shared_cursor import CursorPagination
 
 from ..validation import (
     read_date_time,
@@ -470,6 +471,23 @@ class OrganizationMembersResponse(BaseModel):
 
     members: list[MemberWithUser]
     """Members of the organization, each combining membership details (role, status) with the associated user's identity."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["members"])
+        return value
+
+
+class ListOrganizationsMembersResponse(BaseModel):
+    """Typed representation of the `ListOrganizationsMembersResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    members: list[MemberWithUser]
+    """Members of the organization, each combining membership details (role, status) with the associated user's identity."""
+    pagination: CursorPagination | NotGiven = NOT_GIVEN
+    """To paginate the response, issue an initial request with `limit` value. Then, add the value returned in the response `.pagination.next` attribute into the request under the `cursor` query parameter to the subsequent request to retrieve next page in pagination. The contents on cursor `next` are opaque, clients are not expected to make any assumptions on the format of the data inside the cursor."""
 
     @model_validator(mode="before")
     @classmethod

@@ -21,10 +21,10 @@ from octridev_neon.client import (
 from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     ConsumptionHistoryGranularity,
-    ConsumptionHistoryPerProjectResponse,
-    ConsumptionHistoryPerProjectV2Response,
     ConsumptionHistoryQueryMetrics,
     GeneralError,
+    GetConsumptionHistoryPerProjectResponse,
+    GetConsumptionHistoryPerProjectV2Response,
 )
 from octridev_neon.validation import (
     validate_date_time,
@@ -77,7 +77,7 @@ async def get_consumption_history_per_project(
     metrics: ConsumptionHistoryQueryMetrics | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerProjectResponse:
+) -> GetConsumptionHistoryPerProjectResponse:
     """Retrieves consumption metrics for Scale, Business, and Enterprise plan projects.
     History begins at the time of upgrade. Results are ordered by time in ascending
     order (oldest to newest). Issuing a call to this API does not wake a project's
@@ -174,8 +174,8 @@ async def get_consumption_history_per_project(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerProjectResponse"),
-            ConsumptionHistoryPerProjectResponse,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerProjectResponse"),
+            GetConsumptionHistoryPerProjectResponse,
         ),
     )
 
@@ -193,7 +193,7 @@ def get_consumption_history_per_project_sync(
     metrics: ConsumptionHistoryQueryMetrics | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerProjectResponse:
+) -> GetConsumptionHistoryPerProjectResponse:
     """Retrieves consumption metrics for Scale, Business, and Enterprise plan projects.
     History begins at the time of upgrade. Results are ordered by time in ascending
     order (oldest to newest). Issuing a call to this API does not wake a project's
@@ -290,8 +290,8 @@ def get_consumption_history_per_project_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerProjectResponse"),
-            ConsumptionHistoryPerProjectResponse,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerProjectResponse"),
+            GetConsumptionHistoryPerProjectResponse,
         ),
     )
 
@@ -311,7 +311,7 @@ async def get_consumption_history_per_project_v2(
     project_ids: list[str] | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerProjectV2Response:
+) -> GetConsumptionHistoryPerProjectV2Response:
     """Returns consumption metrics for up to `limit` projects per page. If `project_ids` is
     omitted, projects in the organization are included across pages (use `cursor`). If
     `project_ids` is provided, the response is limited to those projects (up to 100).
@@ -406,8 +406,8 @@ async def get_consumption_history_per_project_v2(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerProjectV2Response"),
-            ConsumptionHistoryPerProjectV2Response,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerProjectV2Response"),
+            GetConsumptionHistoryPerProjectV2Response,
         ),
     )
 
@@ -424,7 +424,7 @@ def get_consumption_history_per_project_v2_sync(
     project_ids: list[str] | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> ConsumptionHistoryPerProjectV2Response:
+) -> GetConsumptionHistoryPerProjectV2Response:
     """Returns consumption metrics for up to `limit` projects per page. If `project_ids` is
     omitted, projects in the organization are included across pages (use `cursor`). If
     `project_ids` is provided, the response is limited to those projects (up to 100).
@@ -519,8 +519,8 @@ def get_consumption_history_per_project_v2_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "ConsumptionHistoryPerProjectV2Response"),
-            ConsumptionHistoryPerProjectV2Response,
+            _validate_response_enums(response.data, "GetConsumptionHistoryPerProjectV2Response"),
+            GetConsumptionHistoryPerProjectV2Response,
         ),
     )
 

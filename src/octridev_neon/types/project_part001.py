@@ -139,9 +139,6 @@ class ProjectJWKSResponse(BaseModel):
         return value
 
 
-AdvisorCategory = Literal["SECURITY", "PERFORMANCE"] | str
-
-
 class ProjectUpdateRequestProject(BaseModel):
     """Required object value serialized in the `project` wire field."""
 
@@ -420,51 +417,6 @@ class ProjectMembers(BaseModel):
 ProjectAuditLogLevel = Literal["base", "extended", "full"] | str
 
 
-class AvailablePreloadLibrary(BaseModel):
-    """Typed representation of the `AvailablePreloadLibrary` API schema."""
-
-    library_name: str
-    """Name of the Postgres shared preload library as it appears in the `shared_preload_libraries` parameter (for example, `pg_stat_statements`)."""
-    description: str
-    """Human-readable explanation of the library's purpose and behavior."""
-    is_default: bool
-    """Whether this library is loaded by default in the `shared_preload_libraries` configuration for new compute endpoints."""
-    is_experimental: bool
-    """Marks the library as experimental. Experimental libraries may be unstable, subject to breaking changes, or not recommended for production use."""
-    version: str
-    """Version of the preload library."""
-
-    @model_validator(mode="before")
-    @classmethod
-    def _validate_required(cls, value):
-        validate_required(
-            value, ["library_name", "description", "is_default", "is_experimental", "version"]
-        )
-        return value
-
-
-class AvailablePreloadLibraries(BaseModel):
-    """Typed representation of the `AvailablePreloadLibraries` API schema."""
-
-    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
-
-    libraries: list[AvailablePreloadLibrary] | NotGiven = NOT_GIVEN
-    """Preload libraries available for the project's Postgres version. Each entry includes `library_name`, `description`, `is_default`, `is_experimental`, and `version`."""
-
-
-class ConnectionURIResponse(BaseModel):
-    """Typed representation of the `ConnectionURIResponse` API schema."""
-
-    uri: str
-    """The connection URI."""
-
-    @model_validator(mode="before")
-    @classmethod
-    def _validate_required(cls, value):
-        validate_required(value, ["uri"])
-        return value
-
-
 class AllowedIps(BaseModel):
     """
     A list of IP addresses that are allowed to connect to the compute endpoint.
@@ -478,3 +430,40 @@ class AllowedIps(BaseModel):
     """A list of IP addresses that are allowed to connect to the endpoint."""
     protected_branches_only: bool | NotGiven = NOT_GIVEN
     """If true, the list will be applied only to protected branches."""
+
+
+class MaintenanceWindow(BaseModel):
+    """
+    A maintenance window is a time period during which Neon may perform maintenance on the project's infrastructure.
+    During this time, the project's compute endpoints may be unavailable and existing connections can be
+    interrupted.
+    """
+
+    weekdays: list[int]
+    """
+    A list of weekdays when the maintenance window is active.
+    Encoded as ints, where 1 - Monday, and 7 - Sunday.
+    """
+    start_time: str
+    """Start time of the maintenance window, in the format of "HH:MM". Uses UTC."""
+    end_time: str
+    """End time of the maintenance window, in the format of "HH:MM". Uses UTC."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["weekdays", "start_time", "end_time"])
+        return value
+
+
+class JWKSResponse(BaseModel):
+    """Typed representation of the `JWKSResponse` API schema."""
+
+    jwks: JWKS
+    """JWKS configuration associated with the project."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["jwks"])
+        return value

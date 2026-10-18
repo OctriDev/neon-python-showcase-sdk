@@ -4,17 +4,14 @@
 from __future__ import annotations
 
 import datetime
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Literal
 
 from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
-from octridev_neon.types.project_part001 import (
-    JWKS,
-    AdvisorCategory,
-    ProjectPermissionLevel,
-    ProjectRole,
-)
+from octridev_neon.types.project_part001 import JWKS, ProjectPermissionLevel, ProjectRole
+from octridev_neon.types.shared import Database, Endpoint, Role
+from octridev_neon.types.shared_branch import Branch
 from octridev_neon.types.shared_connection import ConnectionDetails
 from octridev_neon.types.shared_operation import Operation
 
@@ -27,58 +24,8 @@ from ..validation import (
 )
 
 if TYPE_CHECKING:
-    from octridev_neon.types.project_part003 import ProjectSettingsData
+    from octridev_neon.types.project_part003 import Project, ProjectSettingsData
     from octridev_neon.types.project_part004 import DefaultEndpointSettings
-
-
-class MaintenanceWindow(BaseModel):
-    """
-    A maintenance window is a time period during which Neon may perform maintenance on the project's infrastructure.
-    During this time, the project's compute endpoints may be unavailable and existing connections can be
-    interrupted.
-    """
-
-    weekdays: list[int]
-    """
-    A list of weekdays when the maintenance window is active.
-    Encoded as ints, where 1 - Monday, and 7 - Sunday.
-    """
-    start_time: str
-    """Start time of the maintenance window, in the format of "HH:MM". Uses UTC."""
-    end_time: str
-    """End time of the maintenance window, in the format of "HH:MM". Uses UTC."""
-
-    @model_validator(mode="before")
-    @classmethod
-    def _validate_required(cls, value):
-        validate_required(value, ["weekdays", "start_time", "end_time"])
-        return value
-
-
-class ConnectionURIsResponse(BaseModel):
-    """Typed representation of the `ConnectionURIsResponse` API schema."""
-
-    connection_uris: list[ConnectionDetails]
-    """Connection URIs for the project. Each entry contains credentials and should be treated as sensitive."""
-
-    @model_validator(mode="before")
-    @classmethod
-    def _validate_required(cls, value):
-        validate_required(value, ["connection_uris"])
-        return value
-
-
-class JWKSResponse(BaseModel):
-    """Typed representation of the `JWKSResponse` API schema."""
-
-    jwks: JWKS
-    """JWKS configuration associated with the project."""
-
-    @model_validator(mode="before")
-    @classmethod
-    def _validate_required(cls, value):
-        validate_required(value, ["jwks"])
-        return value
 
 
 class ProjectQuota(BaseModel):
@@ -173,57 +120,31 @@ class JWKSCreationOperation(BaseModel):
 ApplicationType = Literal["vercel", "github", "datadog", "opentelemetry"] | str
 
 
-class AdvisorIssue(BaseModel):
-    """Typed representation of the `AdvisorIssue` API schema."""
+class CreateProjectResponse(BaseModel):
+    """Typed representation of the `CreateProjectResponse` API schema."""
 
-    name: str
+    project: Project
     """
-    Unique identifier for the issue type
+    Full details of the project, including configuration, consumption metrics, and ownership.
 
-    @example "rls_disabled_in_public"
+    @example {"id":"spring-example-302709","platform_id":"aws","region_id":"aws-us-east-2","name":"spring-example-302709","provisioner":"k8s-pod","pg_version":15,"proxy_host":"us-east-2.aws.neon.tech","store_passwords":true,"creation_source":"console","history_retention_seconds":604800,"created_at":"2022-12-13T01:30:55Z","updated_at":"2022-12-13T01:30:55Z","owner":{"name":"John Smith","email":"some@email.com","branches_limit":10,"subscription_type":"scale"},"org_id":"org-morning-bread-81040908","owner_id":"629982cc-de05-43db-ae16-28f2399c4910","data_storage_bytes_hour":2831928,"branch_logical_size_limit":10,"branch_logical_size_limit_bytes":10485760,"data_transfer_bytes":1000,"written_data_bytes":193990002,"compute_time_seconds":2485760,"active_time_seconds":621440,"cpu_used_sec":155350,"consumption_period_start":"2022-11-01T00:00:00Z","consumption_period_end":"2022-12-01T00:00:00Z"}
     """
-    title: str
+    connection_uris: list[ConnectionDetails]
+    """Connection URIs for the project. Each entry contains credentials and should be treated as sensitive."""
+    roles: list[Role]
+    """Roles belonging to the branch. Each role includes fields such as `branch_id`, `name`, `protected`, `created_at`, and `updated_at`."""
+    databases: list[Database]
+    """Databases on the branch. Each includes `id`, `name`, `owner_name`, and `created_at`."""
+    operations: list[Operation]
+    """Required array value serialized in the `operations` wire field."""
+    branch: Branch
     """
-    Human-readable title
+    Branch returned by the request.
 
-    @example "RLS Disabled in Public"
+    @example {"id":"br-wispy-meadow-118737","project_id":"spring-example-302709","parent_id":"br-aged-salad-637688","parent_lsn":"0/1DE2850","name":"dev2","protected":false,"current_state":"ready","state_changed_at":"2022-11-30T20:09:48Z","creation_source":"console","created_at":"2022-11-30T19:09:48Z","updated_at":"2022-12-01T19:53:05Z","default":true,"init_source":"parent-data","data_transfer_bytes":72911987,"written_data_bytes":542998300,"compute_time_seconds":823880990,"active_time_seconds":922200,"cpu_used_sec":461100}
     """
-    level: str
-    """
-    Severity level of the issue
-
-    @example "ERROR"
-    """
-    facing: Literal["EXTERNAL", "INTERNAL"] | str
-    """
-    Whether this issue affects external API exposure or is internal only
-
-    @example "EXTERNAL"
-    """
-    categories: list[AdvisorCategory]
-    """
-    Categories this issue belongs to
-
-    @example ["SECURITY"]
-    """
-    description: str
-    """Detailed description of what this check detects"""
-    detail: str
-    """
-    Specific details about this instance of the issue
-
-    @example "Table `public.users` is public, but RLS has not been enabled."
-    """
-    remediation: str
-    """
-    URL to documentation on how to fix this issue
-
-    @example "https://neon.com/docs/data-api/database-advisor"
-    """
-    metadata: dict[str, Any]
-    """Additional context-specific metadata"""
-    cache_key: str
-    """Unique key for caching this issue result"""
+    endpoints: list[Endpoint]
+    """Compute endpoints in the project. Each includes `id`, `branch_id`, `host`, and `type`."""
 
     @model_validator(mode="before")
     @classmethod
@@ -231,18 +152,34 @@ class AdvisorIssue(BaseModel):
         validate_required(
             value,
             [
-                "name",
-                "title",
-                "level",
-                "facing",
-                "categories",
-                "description",
-                "detail",
-                "remediation",
-                "metadata",
-                "cache_key",
+                "project",
+                "connection_uris",
+                "roles",
+                "databases",
+                "operations",
+                "branch",
+                "endpoints",
             ],
         )
+        return value
+
+
+class UpdateProjectResponse(BaseModel):
+    """Typed representation of the `UpdateProjectResponse` API schema."""
+
+    project: Project
+    """
+    Full details of the project, including configuration, consumption metrics, and ownership.
+
+    @example {"id":"spring-example-302709","platform_id":"aws","region_id":"aws-us-east-2","name":"spring-example-302709","provisioner":"k8s-pod","pg_version":15,"proxy_host":"us-east-2.aws.neon.tech","store_passwords":true,"creation_source":"console","history_retention_seconds":604800,"created_at":"2022-12-13T01:30:55Z","updated_at":"2022-12-13T01:30:55Z","owner":{"name":"John Smith","email":"some@email.com","branches_limit":10,"subscription_type":"scale"},"org_id":"org-morning-bread-81040908","owner_id":"629982cc-de05-43db-ae16-28f2399c4910","data_storage_bytes_hour":2831928,"branch_logical_size_limit":10,"branch_logical_size_limit_bytes":10485760,"data_transfer_bytes":1000,"written_data_bytes":193990002,"compute_time_seconds":2485760,"active_time_seconds":621440,"cpu_used_sec":155350,"consumption_period_start":"2022-11-01T00:00:00Z","consumption_period_end":"2022-12-01T00:00:00Z"}
+    """
+    operations: list[Operation]
+    """Required array value serialized in the `operations` wire field."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["project", "operations"])
         return value
 
 

@@ -10,13 +10,14 @@ from .functions_part001 import (
     FunctionDeployRequest,
     FunctionTriggerSchedule,
     FunctionTriggerStorageObjectCreated,
+    ListFunctionsCustomDomainsResponse,
+    ListFunctionsResponse,
     NeonFunction,
     NeonFunctionDeployment,
     NeonFunctionDeploymentResponse,
     NeonFunctionResponse,
     NeonFunctionsListResponse,
     NeonFunctionUpdateRequest,
-    ScheduleTriggerCreateRequest,
     Trigger,
     TriggerCreateRequest,
     TriggerID,
@@ -27,6 +28,7 @@ from .functions_part001 import (
 )
 from .functions_part002 import (
     ScheduleTrigger,
+    ScheduleTriggerCreateRequest,
     ScheduleTriggerUpdateRequest,
     StorageObjectCreatedTrigger,
     StorageObjectCreatedTriggerCreateRequest,
@@ -42,6 +44,8 @@ __all__ = [
     "FunctionDeployRequest",
     "FunctionTriggerSchedule",
     "FunctionTriggerStorageObjectCreated",
+    "ListFunctionsCustomDomainsResponse",
+    "ListFunctionsResponse",
     "NeonFunction",
     "NeonFunctionDeployment",
     "NeonFunctionDeploymentResponse",
@@ -71,6 +75,7 @@ _functions_part001 = importlib.import_module(".functions_part001", __package__)
 
 _deferred_functions_part001: tuple[tuple[str, object], ...] = (
     ("ScheduleTrigger", ScheduleTrigger),
+    ("ScheduleTriggerCreateRequest", ScheduleTriggerCreateRequest),
     ("ScheduleTriggerUpdateRequest", ScheduleTriggerUpdateRequest),
     ("StorageObjectCreatedTrigger", StorageObjectCreatedTrigger),
     ("StorageObjectCreatedTriggerCreateRequest", StorageObjectCreatedTriggerCreateRequest),
@@ -94,4 +99,5 @@ CustomDomainsListResponse.model_rebuild()
 NeonFunctionUpdateRequest.model_rebuild()
 NeonFunctionDeploymentResponse.model_rebuild()
 FunctionDeployRequest.model_rebuild()
-ScheduleTriggerCreateRequest.model_rebuild()
+ListFunctionsResponse.model_rebuild()
+ListFunctionsCustomDomainsResponse.model_rebuild()

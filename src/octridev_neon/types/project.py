@@ -8,12 +8,10 @@ from .project_part001 import (
     AcceptProjectTransferRequestSatisfiesPlanError,
     AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem,
     AddProjectJWKSRequest,
-    AdvisorCategory,
     AllowedIps,
-    AvailablePreloadLibraries,
-    AvailablePreloadLibrary,
-    ConnectionURIResponse,
     GrantPermissionToProjectRequest,
+    JWKSResponse,
+    MaintenanceWindow,
     ProjectAuditLogLevel,
     ProjectJWKSResponse,
     ProjectMemberGrantSource,
@@ -31,16 +29,14 @@ from .project_part001 import (
     ProjectUpdateRequestProject,
 )
 from .project_part002 import (
-    AdvisorIssue,
     ApplicationType,
-    ConnectionURIsResponse,
+    CreateProjectResponse,
     JWKSCreationOperation,
-    JWKSResponse,
-    MaintenanceWindow,
     PgVersion,
     ProjectListItem,
     ProjectQuota,
     SetProjectMemberRoleRequest,
+    UpdateProjectResponse,
 )
 from .project_part003 import Project, ProjectMember, ProjectMemberRoleResponse, ProjectSettingsData
 from .project_part004 import (
@@ -56,14 +52,9 @@ __all__ = [
     "AcceptProjectTransferRequestSatisfiesPlanError",
     "AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem",
     "AddProjectJWKSRequest",
-    "AdvisorCategory",
-    "AdvisorIssue",
     "AllowedIps",
     "ApplicationType",
-    "AvailablePreloadLibraries",
-    "AvailablePreloadLibrary",
-    "ConnectionURIResponse",
-    "ConnectionURIsResponse",
+    "CreateProjectResponse",
     "DefaultEndpointSettings",
     "GrantPermissionToProjectRequest",
     "JWKSCreationOperation",
@@ -96,6 +87,7 @@ __all__ = [
     "ProjectUpdateRequestProject",
     "ProjectsResponse",
     "SetProjectMemberRoleRequest",
+    "UpdateProjectResponse",
 ]
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
@@ -127,26 +119,24 @@ ProjectPermission.model_rebuild()
 ProjectPermissions.model_rebuild()
 GrantPermissionToProjectRequest.model_rebuild()
 ProjectMembers.model_rebuild()
-AvailablePreloadLibrary.model_rebuild()
-AvailablePreloadLibraries.model_rebuild()
-ConnectionURIResponse.model_rebuild()
 AllowedIps.model_rebuild()
+MaintenanceWindow.model_rebuild()
+JWKSResponse.model_rebuild()
 
 _project_part002 = importlib.import_module(".project_part002", __package__)
 
 _deferred_project_part002: tuple[tuple[str, object], ...] = (
     ("DefaultEndpointSettings", DefaultEndpointSettings),
+    ("Project", Project),
     ("ProjectSettingsData", ProjectSettingsData),
 )
 for _name, _value in _deferred_project_part002:
     setattr(_project_part002, _name, _value)
 
-MaintenanceWindow.model_rebuild()
-ConnectionURIsResponse.model_rebuild()
-JWKSResponse.model_rebuild()
 ProjectQuota.model_rebuild()
 JWKSCreationOperation.model_rebuild()
-AdvisorIssue.model_rebuild()
+CreateProjectResponse.model_rebuild()
+UpdateProjectResponse.model_rebuild()
 SetProjectMemberRoleRequest.model_rebuild()
 ProjectListItem.model_rebuild()
 

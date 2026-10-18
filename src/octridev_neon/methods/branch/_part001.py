@@ -23,10 +23,11 @@ from octridev_neon.types import (
     BranchAnonymizedCreateRequest,
     BranchCreateRequest,
     BranchesCountResponse,
-    BranchesResponse,
     BranchOperations,
-    BranchResponse,
+    CreateBranchResponse,
     GeneralError,
+    GetBranchResponse,
+    ListBranchResponse,
 )
 from octridev_neon.validation import validate_pattern, validate_range
 from octridev_neon.wire import _validate_response_enums, to_wire
@@ -67,7 +68,7 @@ async def create_branch(
     body: BranchCreateRequest | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> CreateBranchResponse:
     """Creates a branch in the specified project. No request body is required, but you can
     specify one to create a compute endpoint or select a non-default parent branch. By
     default, the branch is created from the project's default branch with no compute
@@ -95,7 +96,7 @@ async def create_branch(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "CreateBranchResponse"), CreateBranchResponse
         ),
     )
 
@@ -106,7 +107,7 @@ def create_branch_sync(
     body: BranchCreateRequest | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> CreateBranchResponse:
     """Creates a branch in the specified project. No request body is required, but you can
     specify one to create a compute endpoint or select a non-default parent branch. By
     default, the branch is created from the project's default branch with no compute
@@ -134,7 +135,7 @@ def create_branch_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "CreateBranchResponse"), CreateBranchResponse
         ),
     )
 
@@ -153,7 +154,7 @@ async def list_branch(
     include_deleted: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchesResponse:
+) -> ListBranchResponse:
     """Retrieves a list of branches for the specified project. Each Neon project has a root
     branch named `main`. A `branch_id` value has a `br-` prefix. A project may contain
     child branches that were branched from `main` or from another branch. A parent
@@ -205,7 +206,7 @@ async def list_branch(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchesResponse"), BranchesResponse
+            _validate_response_enums(response.data, "ListBranchResponse"), ListBranchResponse
         ),
     )
 
@@ -221,7 +222,7 @@ def list_branch_sync(
     include_deleted: bool | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchesResponse:
+) -> ListBranchResponse:
     """Retrieves a list of branches for the specified project. Each Neon project has a root
     branch named `main`. A `branch_id` value has a `br-` prefix. A project may contain
     child branches that were branched from `main` or from another branch. A parent
@@ -273,7 +274,7 @@ def list_branch_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchesResponse"), BranchesResponse
+            _validate_response_enums(response.data, "ListBranchResponse"), ListBranchResponse
         ),
     )
 
@@ -287,7 +288,7 @@ async def create_branch_anonymized(
     body: BranchAnonymizedCreateRequest,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> CreateBranchResponse:
     """Creates a branch with anonymized data using PostgreSQL Anonymizer for static
     masking. Supply `branch_create` to configure the branch and optionally provide
     `masking_rules` or set `start_anonymization` to true to apply masking rules and
@@ -320,7 +321,7 @@ async def create_branch_anonymized(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "CreateBranchResponse"), CreateBranchResponse
         ),
     )
 
@@ -331,7 +332,7 @@ def create_branch_anonymized_sync(
     body: BranchAnonymizedCreateRequest,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> CreateBranchResponse:
     """Creates a branch with anonymized data using PostgreSQL Anonymizer for static
     masking. Supply `branch_create` to configure the branch and optionally provide
     `masking_rules` or set `start_anonymization` to true to apply masking rules and
@@ -364,7 +365,7 @@ def create_branch_anonymized_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "CreateBranchResponse"), CreateBranchResponse
         ),
     )
 
@@ -451,7 +452,7 @@ async def get_branch(
     branch_id: str,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> GetBranchResponse:
     """Retrieves information about the specified branch. A `branch_id` value has a `br-`
     prefix. Each Neon project is initially created with a root and default branch named
     `main`. A project can contain one or more branches. A parent branch is identified by
@@ -479,7 +480,7 @@ async def get_branch(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "GetBranchResponse"), GetBranchResponse
         ),
     )
 
@@ -490,7 +491,7 @@ def get_branch_sync(
     branch_id: str,
     *,
     request_options: RequestOptions | None = None,
-) -> BranchResponse:
+) -> GetBranchResponse:
     """Retrieves information about the specified branch. A `branch_id` value has a `br-`
     prefix. Each Neon project is initially created with a root and default branch named
     `main`. A project can contain one or more branches. A parent branch is identified by
@@ -518,7 +519,7 @@ def get_branch_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "BranchResponse"), BranchResponse
+            _validate_response_enums(response.data, "GetBranchResponse"), GetBranchResponse
         ),
     )
 

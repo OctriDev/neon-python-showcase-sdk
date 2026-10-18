@@ -23,11 +23,11 @@ from octridev_neon.errors import SdkValidationError, sdk_decode
 from octridev_neon.types import (
     EmptyResponse,
     GeneralError,
+    ListOrganizationsMembersResponse,
     Member,
     MemberRole,
     OrganizationInvitationsResponse,
     OrganizationInviteCreateRequest,
-    OrganizationMembersResponse,
 )
 from octridev_neon.validation import validate_pattern, validate_range, validate_uuid
 from octridev_neon.wire import _validate_response_enums, to_wire
@@ -71,7 +71,7 @@ async def list_organizations_members(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> OrganizationMembersResponse:
+) -> ListOrganizationsMembersResponse:
     """Retrieves a paginated list of members for the specified organization.
 
     Args:
@@ -109,8 +109,8 @@ async def list_organizations_members(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "OrganizationMembersResponse"),
-            OrganizationMembersResponse,
+            _validate_response_enums(response.data, "ListOrganizationsMembersResponse"),
+            ListOrganizationsMembersResponse,
         ),
     )
 
@@ -124,7 +124,7 @@ def list_organizations_members_sync(
     limit: int | NotGiven = NOT_GIVEN,
     *,
     request_options: RequestOptions | None = None,
-) -> OrganizationMembersResponse:
+) -> ListOrganizationsMembersResponse:
     """Retrieves a paginated list of members for the specified organization.
 
     Args:
@@ -162,8 +162,8 @@ def list_organizations_members_sync(
     return sdk_decode(
         _resp,
         lambda response: _validate_pydantic_response(
-            _validate_response_enums(response.data, "OrganizationMembersResponse"),
-            OrganizationMembersResponse,
+            _validate_response_enums(response.data, "ListOrganizationsMembersResponse"),
+            ListOrganizationsMembersResponse,
         ),
     )
 

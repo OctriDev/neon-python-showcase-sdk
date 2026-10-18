@@ -501,6 +501,8 @@ async def list_buckets_objects_paginated(
             break
         for item in _items:
             yield item
+        if not _page.is_truncated:
+            break
         _next = _page.next_cursor
         if _next is None or isinstance(_next, NotGiven):
             break
@@ -536,7 +538,9 @@ async def list_buckets_objects_pages(
         if not _items:
             break
         _next = _page.next_cursor
-        _has_more = not isinstance(_next, NotGiven | None) and _next != _cursor
+        _has_more = (
+            bool(_page.is_truncated) and not isinstance(_next, NotGiven | None) and _next != _cursor
+        )
         yield SdkPage(data=_page, items=_items, has_more=_has_more)
         if not _has_more or _next is None or isinstance(_next, NotGiven):
             break
@@ -590,6 +594,8 @@ def list_buckets_objects_paginated_sync(
         if not _items:
             break
         yield from _items
+        if not _page.is_truncated:
+            break
         _next = _page.next_cursor
         if _next is None or isinstance(_next, NotGiven):
             break
@@ -625,7 +631,9 @@ def list_buckets_objects_pages_sync(
         if not _items:
             break
         _next = _page.next_cursor
-        _has_more = not isinstance(_next, NotGiven | None) and _next != _cursor
+        _has_more = (
+            bool(_page.is_truncated) and not isinstance(_next, NotGiven | None) and _next != _cursor
+        )
         yield SdkPage(data=_page, items=_items, has_more=_has_more)
         if not _has_more or _next is None or isinstance(_next, NotGiven):
             break

@@ -23,6 +23,55 @@ from ..validation import (
 )
 
 
+class ScheduleTriggerCreateRequest(BaseModel):
+    """Typed representation of the `ScheduleTriggerCreateRequest` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    type: Literal["schedule"]
+    """Trigger type discriminator."""
+    function_slug: str
+    """The branch-local Function slug to invoke."""
+    name: str
+    """Human-readable name, unique among triggers visible on the branch."""
+    schedule: FunctionTriggerSchedule
+    """A numeric five-field cron schedule interpreted in UTC."""
+    function_path: str | NotGiven = NOT_GIVEN
+    """Path passed to the target Function. Defaults to `/`."""
+    enabled: bool | NotGiven = NOT_GIVEN
+    """Whether future occurrences should be scheduled."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["type", "function_slug", "name", "schedule"])
+        return value
+
+    @field_validator("type")
+    @classmethod
+    def _validate_type(cls, value):
+        validate_enum("type", value, ["schedule"])
+        return value
+
+    @field_validator("function_slug")
+    @classmethod
+    def _validate_function_slug(cls, value):
+        validate_pattern("function_slug", value, "^[a-z0-9]{1,20}$")
+        return value
+
+    @field_validator("name")
+    @classmethod
+    def _validate_name(cls, value):
+        validate_length("name", value, min=1, max=256)
+        return value
+
+    @field_validator("function_path")
+    @classmethod
+    def _validate_function_path(cls, value):
+        validate_length("function_path", value, min=1, max=2048)
+        return value
+
+
 class StorageObjectCreatedTriggerCreateRequest(BaseModel):
     """Typed representation of the `StorageObjectCreatedTriggerCreateRequest` API schema."""
 

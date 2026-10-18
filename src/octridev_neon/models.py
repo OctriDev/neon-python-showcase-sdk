@@ -77,8 +77,10 @@ from .types import (
     ConsumptionHistoryPerTimeframeV2,
     ConsumptionMetricValue,
     CreateBranchNeonAuthNewUserRequest,
+    CreateBranchResponse,
     CreateCredentialRequest,
     CreateCredentialResponse,
+    CreateProjectResponse,
     CreateSnapshotResponse,
     CredentialMeta,
     CredentialSecret,
@@ -114,16 +116,27 @@ from .types import (
     FunctionTriggerSchedule,
     FunctionTriggerStorageObjectCreated,
     GeneralError,
+    GetBranchResponse,
+    GetConsumptionHistoryPerBranchV2Response,
+    GetConsumptionHistoryPerProjectResponse,
+    GetConsumptionHistoryPerProjectV2Response,
     GetProjectAdvisorSecurityIssuesResponse,
     GrantPermissionToProjectRequest,
     Invitation,
     JWKSCreationOperation,
     JWKSResponse,
     LimitsUnsatisfiedResponse,
+    ListBranchResponse,
     ListCredentialsResponse,
+    ListFunctionsCustomDomainsResponse,
+    ListFunctionsResponse,
     ListNeonAuthIntegrationsResponse,
     ListNeonAuthOAuthClientsResponse,
     ListNeonAuthOauthProvidersResponse,
+    ListOperationResponse,
+    ListOrganizationsMembersResponse,
+    ListProjectsResponse,
+    ListSharedProjectsResponse,
     ListSnapshotsResponse,
     MaintenanceWindow,
     MaskingRule,
@@ -231,6 +244,7 @@ from .types import (
     RealtimeOptions,
     RealtimeSecret,
     RegionResponse,
+    RestoreSnapshotResponse,
     Role,
     RoleCreateRequest,
     RoleOperations,
@@ -261,6 +275,7 @@ from .types import (
     UpdateNeonAuthAllowLocalhostRequest,
     UpdateNeonAuthUserRoleRequest,
     UpdateNeonAuthUserRoleResponse,
+    UpdateProjectResponse,
     UpdateSnapshotResponse,
     VPCEndpoint,
     VPCEndpointAssignment,
@@ -2524,34 +2539,7 @@ _SCHEMAS: dict[str, Any] = {
         "properties": {
             "url": {"python": "url", "type": "string", "format": "uri"},
             "status": {"python": "status", "type": "string"},
-            "settings": {
-                "python": "settings",
-                "type": "object",
-                "nullable": True,
-                "properties": {
-                    "db_aggregates_enabled": {"python": "db_aggregates_enabled", "type": "boolean"},
-                    "db_anon_role": {"python": "db_anon_role", "type": "string"},
-                    "db_extra_search_path": {"python": "db_extra_search_path", "type": "string"},
-                    "db_max_rows": {"python": "db_max_rows", "type": "integer"},
-                    "db_schemas": {
-                        "python": "db_schemas",
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "jwt_role_claim_key": {"python": "jwt_role_claim_key", "type": "string"},
-                    "jwt_cache_max_lifetime": {
-                        "python": "jwt_cache_max_lifetime",
-                        "type": "integer",
-                    },
-                    "openapi_mode": {"python": "openapi_mode", "type": "string"},
-                    "server_cors_allowed_origins": {
-                        "python": "server_cors_allowed_origins",
-                        "type": "string",
-                    },
-                    "server_timing_enabled": {"python": "server_timing_enabled", "type": "boolean"},
-                },
-                "allOf": [{"ref": "DataAPISettings"}],
-            },
+            "settings": {"python": "settings", "ref": "DataAPISettings"},
             "available_schemas": {
                 "python": "available_schemas",
                 "type": "array",
@@ -3097,6 +3085,7 @@ _SCHEMAS: dict[str, Any] = {
         "properties": {
             "sender_email": {"python": "sender_email", "type": "string"},
             "sender_name": {"python": "sender_name", "type": "string"},
+            "type": {"python": "type", "type": "string", "enum": ["shared"]},
         },
     },
     "StandardEmailServer": {
@@ -3108,6 +3097,7 @@ _SCHEMAS: dict[str, Any] = {
             "password": {"python": "password", "type": "string"},
             "sender_email": {"python": "sender_email", "type": "string"},
             "sender_name": {"python": "sender_name", "type": "string"},
+            "type": {"python": "type", "type": "string", "enum": ["standard"]},
         },
     },
     "StandardEmailServerResponse": {
@@ -3120,6 +3110,7 @@ _SCHEMAS: dict[str, Any] = {
             "password": {"python": "password", "type": "string"},
             "sender_email": {"python": "sender_email", "type": "string"},
             "sender_name": {"python": "sender_name", "type": "string"},
+            "type": {"python": "type", "type": "string", "enum": ["standard"]},
         },
     },
     "NeonAuthEmailServerConfig": {
@@ -3875,42 +3866,8 @@ _SCHEMAS: dict[str, Any] = {
             "slug": {"python": "slug", "type": "string"},
             "name": {"python": "name", "type": "string"},
             "invocation_url": {"python": "invocation_url", "type": "string"},
-            "current_deployment": {
-                "python": "current_deployment",
-                "required": ["id", "status", "memory_mib", "runtime", "created_at"],
-                "properties": {
-                    "id": {"python": "id", "type": "integer"},
-                    "status": {"python": "status", "type": "string"},
-                    "memory_mib": {"python": "memory_mib", "type": "integer"},
-                    "runtime": {"python": "runtime", "type": "string"},
-                    "created_at": {"python": "created_at", "type": "string"},
-                    "environment": {
-                        "python": "environment",
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "error": {"python": "error", "type": "string"},
-                },
-                "allOf": [{"ref": "NeonFunctionDeployment"}],
-            },
-            "active_deployment": {
-                "python": "active_deployment",
-                "required": ["id", "status", "memory_mib", "runtime", "created_at"],
-                "properties": {
-                    "id": {"python": "id", "type": "integer"},
-                    "status": {"python": "status", "type": "string"},
-                    "memory_mib": {"python": "memory_mib", "type": "integer"},
-                    "runtime": {"python": "runtime", "type": "string"},
-                    "created_at": {"python": "created_at", "type": "string"},
-                    "environment": {
-                        "python": "environment",
-                        "type": "array",
-                        "items": {"type": "string"},
-                    },
-                    "error": {"python": "error", "type": "string"},
-                },
-                "allOf": [{"ref": "NeonFunctionDeployment"}],
-            },
+            "current_deployment": {"python": "current_deployment", "ref": "NeonFunctionDeployment"},
+            "active_deployment": {"python": "active_deployment", "ref": "NeonFunctionDeployment"},
             "created_at": {"python": "created_at", "type": "string"},
         },
     },
@@ -4219,6 +4176,229 @@ _SCHEMAS: dict[str, Any] = {
             "environment": {"python": "environment", "type": "string"},
         },
     },
+    "ListProjectsResponse": {
+        "required": ["projects", "applications", "integrations"],
+        "properties": {
+            "projects": {
+                "python": "projects",
+                "type": "array",
+                "items": {"ref": "ProjectListItem"},
+            },
+            "unavailable_project_ids": {
+                "python": "unavailable_project_ids",
+                "type": "array",
+                "items": {"type": "string", "pattern": "^[a-z0-9-]{1,60}$"},
+            },
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+            "applications": {
+                "python": "applications",
+                "type": "object",
+                "additionalProperties": {"type": "array", "items": {"ref": "ApplicationType"}},
+            },
+            "integrations": {
+                "python": "integrations",
+                "type": "object",
+                "additionalProperties": {"type": "array", "items": {"ref": "ApplicationType"}},
+            },
+        },
+        "allOf": [
+            {"ref": "ProjectsResponse"},
+            {"ref": "PaginationResponse"},
+            {"ref": "ProjectsApplicationsMapResponse"},
+            {"ref": "ProjectsIntegrationsMapResponse"},
+        ],
+    },
+    "CreateProjectResponse": {
+        "required": [
+            "project",
+            "connection_uris",
+            "roles",
+            "databases",
+            "operations",
+            "branch",
+            "endpoints",
+        ],
+        "properties": {
+            "project": {"python": "project", "ref": "Project"},
+            "connection_uris": {
+                "python": "connection_uris",
+                "type": "array",
+                "items": {"ref": "ConnectionDetails"},
+            },
+            "roles": {"python": "roles", "type": "array", "items": {"ref": "Role"}},
+            "databases": {"python": "databases", "type": "array", "items": {"ref": "Database"}},
+            "operations": {"python": "operations", "type": "array", "items": {"ref": "Operation"}},
+            "branch": {"python": "branch", "ref": "Branch"},
+            "endpoints": {"python": "endpoints", "type": "array", "items": {"ref": "Endpoint"}},
+        },
+        "allOf": [
+            {"ref": "ProjectResponse"},
+            {"ref": "ConnectionURIsResponse"},
+            {"ref": "RolesResponse"},
+            {"ref": "DatabasesResponse"},
+            {"ref": "OperationsResponse"},
+            {"ref": "BranchResponse"},
+            {"ref": "EndpointsResponse"},
+        ],
+    },
+    "ListSharedProjectsResponse": {
+        "required": ["projects"],
+        "properties": {
+            "projects": {
+                "python": "projects",
+                "type": "array",
+                "items": {"ref": "ProjectListItem"},
+            },
+            "unavailable_project_ids": {
+                "python": "unavailable_project_ids",
+                "type": "array",
+                "items": {"type": "string", "pattern": "^[a-z0-9-]{1,60}$"},
+            },
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+        },
+        "allOf": [{"ref": "ProjectsResponse"}, {"ref": "PaginationResponse"}],
+    },
+    "UpdateProjectResponse": {
+        "required": ["project", "operations"],
+        "properties": {
+            "project": {"python": "project", "ref": "Project"},
+            "operations": {"python": "operations", "type": "array", "items": {"ref": "Operation"}},
+        },
+        "allOf": [{"ref": "ProjectResponse"}, {"ref": "OperationsResponse"}],
+    },
+    "ListOperationResponse": {
+        "required": ["operations"],
+        "properties": {
+            "operations": {"python": "operations", "type": "array", "items": {"ref": "Operation"}},
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+        },
+        "allOf": [{"ref": "OperationsResponse"}, {"ref": "PaginationResponse"}],
+    },
+    "ListBranchResponse": {
+        "required": ["branches", "annotations"],
+        "properties": {
+            "branches": {"python": "branches", "type": "array", "items": {"ref": "Branch"}},
+            "annotations": {
+                "python": "annotations",
+                "type": "object",
+                "additionalProperties": {"ref": "AnnotationData"},
+            },
+            "pagination": {"python": "pagination", "ref": "CursorPagination"},
+        },
+        "allOf": [
+            {"ref": "BranchesResponse"},
+            {"ref": "AnnotationsMapResponse"},
+            {"ref": "CursorPaginationResponse"},
+        ],
+    },
+    "CreateBranchResponse": {
+        "required": ["branch", "endpoints", "operations", "roles", "databases"],
+        "properties": {
+            "branch": {"python": "branch", "ref": "Branch"},
+            "endpoints": {"python": "endpoints", "type": "array", "items": {"ref": "Endpoint"}},
+            "operations": {"python": "operations", "type": "array", "items": {"ref": "Operation"}},
+            "roles": {"python": "roles", "type": "array", "items": {"ref": "Role"}},
+            "databases": {"python": "databases", "type": "array", "items": {"ref": "Database"}},
+            "connection_uris": {
+                "python": "connection_uris",
+                "type": "array",
+                "items": {"ref": "ConnectionDetails"},
+            },
+        },
+        "allOf": [
+            {"ref": "BranchResponse"},
+            {"ref": "EndpointsResponse"},
+            {"ref": "OperationsResponse"},
+            {"ref": "RolesResponse"},
+            {"ref": "DatabasesResponse"},
+            {"ref": "ConnectionURIsOptionalResponse"},
+        ],
+    },
+    "GetBranchResponse": {
+        "required": ["branch", "annotation"],
+        "properties": {
+            "branch": {"python": "branch", "ref": "Branch"},
+            "annotation": {"python": "annotation", "ref": "AnnotationData"},
+        },
+        "allOf": [{"ref": "BranchResponse"}, {"ref": "AnnotationResponse"}],
+    },
+    "GetConsumptionHistoryPerProjectResponse": {
+        "required": ["projects"],
+        "properties": {
+            "projects": {
+                "python": "projects",
+                "type": "array",
+                "items": {"ref": "ConsumptionHistoryPerProject"},
+            },
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+        },
+        "allOf": [{"ref": "ConsumptionHistoryPerProjectResponse"}, {"ref": "PaginationResponse"}],
+    },
+    "GetConsumptionHistoryPerProjectV2Response": {
+        "required": ["projects"],
+        "properties": {
+            "projects": {
+                "python": "projects",
+                "type": "array",
+                "items": {"ref": "ConsumptionHistoryPerProjectV2"},
+            },
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+        },
+        "allOf": [{"ref": "ConsumptionHistoryPerProjectV2Response"}, {"ref": "PaginationResponse"}],
+    },
+    "GetConsumptionHistoryPerBranchV2Response": {
+        "required": ["branches"],
+        "properties": {
+            "branches": {
+                "python": "branches",
+                "type": "array",
+                "items": {"ref": "ConsumptionHistoryPerBranchV2"},
+            },
+            "pagination": {"python": "pagination", "ref": "Pagination"},
+        },
+        "allOf": [{"ref": "ConsumptionHistoryPerBranchV2Response"}, {"ref": "PaginationResponse"}],
+    },
+    "ListOrganizationsMembersResponse": {
+        "required": ["members"],
+        "properties": {
+            "members": {"python": "members", "type": "array", "items": {"ref": "MemberWithUser"}},
+            "pagination": {"python": "pagination", "ref": "CursorPagination"},
+        },
+        "allOf": [{"ref": "OrganizationMembersResponse"}, {"ref": "CursorPaginationResponse"}],
+    },
+    "RestoreSnapshotResponse": {
+        "required": ["branch", "operations"],
+        "properties": {
+            "branch": {"python": "branch", "ref": "Branch"},
+            "endpoints": {"python": "endpoints", "type": "array", "items": {"ref": "Endpoint"}},
+            "operations": {"python": "operations", "type": "array", "items": {"ref": "Operation"}},
+        },
+        "allOf": [
+            {"ref": "BranchResponse"},
+            {"ref": "EndpointsOptionalResponse"},
+            {"ref": "OperationsResponse"},
+        ],
+    },
+    "ListFunctionsResponse": {
+        "required": ["functions"],
+        "properties": {
+            "functions": {"python": "functions", "type": "array", "items": {"ref": "NeonFunction"}},
+            "pagination": {"python": "pagination", "ref": "CursorPagination"},
+        },
+        "allOf": [{"ref": "NeonFunctionsListResponse"}, {"ref": "CursorPaginationResponse"}],
+    },
+    "ListFunctionsCustomDomainsResponse": {
+        "required": ["custom_domains"],
+        "properties": {
+            "custom_domains": {
+                "python": "custom_domains",
+                "type": "array",
+                "items": {"ref": "CustomDomain"},
+            },
+            "pagination": {"python": "pagination", "ref": "CursorPagination"},
+        },
+        "allOf": [{"ref": "CustomDomainsListResponse"}, {"ref": "CursorPaginationResponse"}],
+    },
     "GetProjectAdvisorSecurityIssuesResponse": {
         "type": "object",
         "required": ["issues"],
@@ -4503,6 +4683,21 @@ _MODEL_TYPES: dict[str, type[Any]] = {
     "NeonFunctionUpdateRequest": NeonFunctionUpdateRequest,
     "NeonFunctionDeploymentResponse": NeonFunctionDeploymentResponse,
     "FunctionDeployRequest": FunctionDeployRequest,
+    "ListProjectsResponse": ListProjectsResponse,
+    "CreateProjectResponse": CreateProjectResponse,
+    "ListSharedProjectsResponse": ListSharedProjectsResponse,
+    "UpdateProjectResponse": UpdateProjectResponse,
+    "ListOperationResponse": ListOperationResponse,
+    "ListBranchResponse": ListBranchResponse,
+    "CreateBranchResponse": CreateBranchResponse,
+    "GetBranchResponse": GetBranchResponse,
+    "GetConsumptionHistoryPerProjectResponse": GetConsumptionHistoryPerProjectResponse,
+    "GetConsumptionHistoryPerProjectV2Response": GetConsumptionHistoryPerProjectV2Response,
+    "GetConsumptionHistoryPerBranchV2Response": GetConsumptionHistoryPerBranchV2Response,
+    "ListOrganizationsMembersResponse": ListOrganizationsMembersResponse,
+    "RestoreSnapshotResponse": RestoreSnapshotResponse,
+    "ListFunctionsResponse": ListFunctionsResponse,
+    "ListFunctionsCustomDomainsResponse": ListFunctionsCustomDomainsResponse,
     "GetProjectAdvisorSecurityIssuesResponse": GetProjectAdvisorSecurityIssuesResponse,
     "CreateSnapshotResponse": CreateSnapshotResponse,
     "ListSnapshotsResponse": ListSnapshotsResponse,
@@ -6407,6 +6602,106 @@ def create_function_deploy_request(value: Mapping[str, object]) -> FunctionDeplo
     return cast(FunctionDeployRequest, _construct_model(value, "FunctionDeployRequest"))
 
 
+def create_list_projects_response(value: Mapping[str, object]) -> ListProjectsResponse:
+    """Construct one ListProjectsResponse after applying its schema constraints."""
+    return cast(ListProjectsResponse, _construct_model(value, "ListProjectsResponse"))
+
+
+def create_create_project_response(value: Mapping[str, object]) -> CreateProjectResponse:
+    """Construct one CreateProjectResponse after applying its schema constraints."""
+    return cast(CreateProjectResponse, _construct_model(value, "CreateProjectResponse"))
+
+
+def create_list_shared_projects_response(value: Mapping[str, object]) -> ListSharedProjectsResponse:
+    """Construct one ListSharedProjectsResponse after applying its schema constraints."""
+    return cast(ListSharedProjectsResponse, _construct_model(value, "ListSharedProjectsResponse"))
+
+
+def create_update_project_response(value: Mapping[str, object]) -> UpdateProjectResponse:
+    """Construct one UpdateProjectResponse after applying its schema constraints."""
+    return cast(UpdateProjectResponse, _construct_model(value, "UpdateProjectResponse"))
+
+
+def create_list_operation_response(value: Mapping[str, object]) -> ListOperationResponse:
+    """Construct one ListOperationResponse after applying its schema constraints."""
+    return cast(ListOperationResponse, _construct_model(value, "ListOperationResponse"))
+
+
+def create_list_branch_response(value: Mapping[str, object]) -> ListBranchResponse:
+    """Construct one ListBranchResponse after applying its schema constraints."""
+    return cast(ListBranchResponse, _construct_model(value, "ListBranchResponse"))
+
+
+def create_create_branch_response(value: Mapping[str, object]) -> CreateBranchResponse:
+    """Construct one CreateBranchResponse after applying its schema constraints."""
+    return cast(CreateBranchResponse, _construct_model(value, "CreateBranchResponse"))
+
+
+def create_get_branch_response(value: Mapping[str, object]) -> GetBranchResponse:
+    """Construct one GetBranchResponse after applying its schema constraints."""
+    return cast(GetBranchResponse, _construct_model(value, "GetBranchResponse"))
+
+
+def create_get_consumption_history_per_project_response(
+    value: Mapping[str, object],
+) -> GetConsumptionHistoryPerProjectResponse:
+    """Construct one GetConsumptionHistoryPerProjectResponse after applying its schema constraints."""
+    return cast(
+        GetConsumptionHistoryPerProjectResponse,
+        _construct_model(value, "GetConsumptionHistoryPerProjectResponse"),
+    )
+
+
+def create_get_consumption_history_per_project_v2_response(
+    value: Mapping[str, object],
+) -> GetConsumptionHistoryPerProjectV2Response:
+    """Construct one GetConsumptionHistoryPerProjectV2Response after applying its schema constraints."""
+    return cast(
+        GetConsumptionHistoryPerProjectV2Response,
+        _construct_model(value, "GetConsumptionHistoryPerProjectV2Response"),
+    )
+
+
+def create_get_consumption_history_per_branch_v2_response(
+    value: Mapping[str, object],
+) -> GetConsumptionHistoryPerBranchV2Response:
+    """Construct one GetConsumptionHistoryPerBranchV2Response after applying its schema constraints."""
+    return cast(
+        GetConsumptionHistoryPerBranchV2Response,
+        _construct_model(value, "GetConsumptionHistoryPerBranchV2Response"),
+    )
+
+
+def create_list_organizations_members_response(
+    value: Mapping[str, object],
+) -> ListOrganizationsMembersResponse:
+    """Construct one ListOrganizationsMembersResponse after applying its schema constraints."""
+    return cast(
+        ListOrganizationsMembersResponse,
+        _construct_model(value, "ListOrganizationsMembersResponse"),
+    )
+
+
+def create_restore_snapshot_response(value: Mapping[str, object]) -> RestoreSnapshotResponse:
+    """Construct one RestoreSnapshotResponse after applying its schema constraints."""
+    return cast(RestoreSnapshotResponse, _construct_model(value, "RestoreSnapshotResponse"))
+
+
+def create_list_functions_response(value: Mapping[str, object]) -> ListFunctionsResponse:
+    """Construct one ListFunctionsResponse after applying its schema constraints."""
+    return cast(ListFunctionsResponse, _construct_model(value, "ListFunctionsResponse"))
+
+
+def create_list_functions_custom_domains_response(
+    value: Mapping[str, object],
+) -> ListFunctionsCustomDomainsResponse:
+    """Construct one ListFunctionsCustomDomainsResponse after applying its schema constraints."""
+    return cast(
+        ListFunctionsCustomDomainsResponse,
+        _construct_model(value, "ListFunctionsCustomDomainsResponse"),
+    )
+
+
 def create_get_project_advisor_security_issues_response(
     value: Mapping[str, object],
 ) -> GetProjectAdvisorSecurityIssuesResponse:
@@ -6513,8 +6808,10 @@ __all__ = [
     "create_consumption_history_per_timeframe_v2",
     "create_consumption_metric_value",
     "create_create_branch_neon_auth_new_user_request",
+    "create_create_branch_response",
     "create_create_credential_request",
     "create_create_credential_response",
+    "create_create_project_response",
     "create_create_snapshot_response",
     "create_credential_meta",
     "create_credential_secret",
@@ -6550,6 +6847,10 @@ __all__ = [
     "create_function_trigger_schedule",
     "create_function_trigger_storage_object_created",
     "create_general_error",
+    "create_get_branch_response",
+    "create_get_consumption_history_per_branch_v2_response",
+    "create_get_consumption_history_per_project_response",
+    "create_get_consumption_history_per_project_v2_response",
     "create_get_project_advisor_security_issues_response",
     "create_grant_permission_to_project_request",
     "create_invitation",
@@ -6557,10 +6858,17 @@ __all__ = [
     "create_jwks_creation_operation",
     "create_jwks_response",
     "create_limits_unsatisfied_response",
+    "create_list_branch_response",
     "create_list_credentials_response",
+    "create_list_functions_custom_domains_response",
+    "create_list_functions_response",
     "create_list_neon_auth_integrations_response",
     "create_list_neon_auth_oauth_clients_response",
     "create_list_neon_auth_oauth_providers_response",
+    "create_list_operation_response",
+    "create_list_organizations_members_response",
+    "create_list_projects_response",
+    "create_list_shared_projects_response",
     "create_list_snapshots_response",
     "create_maintenance_window",
     "create_masking_rule",
@@ -6668,6 +6976,7 @@ __all__ = [
     "create_realtime_options",
     "create_realtime_secret",
     "create_region_response",
+    "create_restore_snapshot_response",
     "create_role",
     "create_role_create_request",
     "create_role_operations",
@@ -6698,6 +7007,7 @@ __all__ = [
     "create_update_neon_auth_allow_localhost_request",
     "create_update_neon_auth_user_role_request",
     "create_update_neon_auth_user_role_response",
+    "create_update_project_response",
     "create_update_snapshot_response",
     "create_vpc_endpoint",
     "create_vpc_endpoint_assignment",

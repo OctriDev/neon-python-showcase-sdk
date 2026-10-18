@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from pydantic import BaseModel, model_validator
 
-from octridev_neon.types.project import AdvisorIssue
+from octridev_neon.types.project_advisor import AdvisorIssue
 from octridev_neon.types.shared_operation import Operation
 from octridev_neon.types.snapshot import Snapshot
 

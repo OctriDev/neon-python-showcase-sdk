@@ -9,6 +9,8 @@ from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
 from octridev_neon.types.shared import Endpoint
+from octridev_neon.types.shared_branch import Branch
+from octridev_neon.types.shared_operation import Operation
 
 from ..validation import (
     read_date_time,
@@ -192,4 +194,27 @@ class BackupSchedule(BaseModel):
     @classmethod
     def _validate_required(cls, value):
         validate_required(value, ["schedule"])
+        return value
+
+
+class RestoreSnapshotResponse(BaseModel):
+    """Typed representation of the `RestoreSnapshotResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    branch: Branch
+    """
+    Branch returned by the request.
+
+    @example {"id":"br-wispy-meadow-118737","project_id":"spring-example-302709","parent_id":"br-aged-salad-637688","parent_lsn":"0/1DE2850","name":"dev2","protected":false,"current_state":"ready","state_changed_at":"2022-11-30T20:09:48Z","creation_source":"console","created_at":"2022-11-30T19:09:48Z","updated_at":"2022-12-01T19:53:05Z","default":true,"init_source":"parent-data","data_transfer_bytes":72911987,"written_data_bytes":542998300,"compute_time_seconds":823880990,"active_time_seconds":922200,"cpu_used_sec":461100}
+    """
+    operations: list[Operation]
+    """Required array value serialized in the `operations` wire field."""
+    endpoints: list[Endpoint] | NotGiven = NOT_GIVEN
+    """Compute endpoints associated with the project."""
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["branch", "operations"])
         return value

@@ -10,7 +10,7 @@ from pydantic import BaseModel, ConfigDict, field_validator, model_validator
 
 from octridev_neon.client import NOT_GIVEN, NotGiven
 
-from ..validation import read_date_time, validate_date_time, validate_required, validate_uri
+from ...validation import read_date_time, validate_date_time, validate_required, validate_uri
 
 
 class DataAPISettings(BaseModel):

@@ -3,9 +3,11 @@
 
 from __future__ import annotations
 
-from pydantic import BaseModel, model_validator
+from pydantic import BaseModel, ConfigDict, model_validator
 
+from octridev_neon.client import NOT_GIVEN, NotGiven
 from octridev_neon.types.shared_operation import Operation
+from octridev_neon.types.shared_pagination import Pagination
 
 from ..validation import validate_required
 
@@ -24,4 +26,25 @@ class OperationResponse(BaseModel):
     @classmethod
     def _validate_required(cls, value):
         validate_required(value, ["operation"])
+        return value
+
+
+class ListOperationResponse(BaseModel):
+    """Typed representation of the `ListOperationResponse` API schema."""
+
+    model_config = ConfigDict(populate_by_name=False, arbitrary_types_allowed=True)
+
+    operations: list[Operation]
+    """Required array value serialized in the `operations` wire field."""
+    pagination: Pagination | NotGiven = NOT_GIVEN
+    """
+    Cursor-based pagination. The `cursor` value reflects the endpoint's sort field (for example, an ID or timestamp), so pass it back unchanged.
+
+    @example {"cursor":"2022-12-07T00:45:05.262011Z"}
+    """
+
+    @model_validator(mode="before")
+    @classmethod
+    def _validate_required(cls, value):
+        validate_required(value, ["operations"])
         return value
