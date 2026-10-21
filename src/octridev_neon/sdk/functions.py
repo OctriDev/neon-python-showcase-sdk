@@ -29,10 +29,10 @@ from ..methods.functions import (
     list_functions_triggers_sync,
     register_functions_custom_domain,
     register_functions_custom_domain_sync,
+    update_function_trigger,
+    update_function_trigger_sync,
     update_functions,
     update_functions_sync,
-    update_functions_trigger,
-    update_functions_trigger_sync,
 )
 
 
@@ -54,8 +54,8 @@ class _FunctionsNamespace:
         self.create_trigger.__doc__ = create_functions_trigger_sync.__doc__
         self.get_trigger = partial(get_functions_trigger_sync, config)
         self.get_trigger.__doc__ = get_functions_trigger_sync.__doc__
-        self.update_trigger = partial(update_functions_trigger_sync, config)
-        self.update_trigger.__doc__ = update_functions_trigger_sync.__doc__
+        self.update_trigger = partial(update_function_trigger_sync, config)
+        self.update_trigger.__doc__ = update_function_trigger_sync.__doc__
         self.delete_trigger = partial(delete_functions_trigger_sync, config)
         self.delete_trigger.__doc__ = delete_functions_trigger_sync.__doc__
         self.register_custom_domain = partial(register_functions_custom_domain_sync, config)
@@ -84,8 +84,8 @@ class _AsyncFunctionsNamespace:
         self.create_trigger.__doc__ = create_functions_trigger.__doc__
         self.get_trigger = partial(get_functions_trigger, config)
         self.get_trigger.__doc__ = get_functions_trigger.__doc__
-        self.update_trigger = partial(update_functions_trigger, config)
-        self.update_trigger.__doc__ = update_functions_trigger.__doc__
+        self.update_trigger = partial(update_function_trigger, config)
+        self.update_trigger.__doc__ = update_function_trigger.__doc__
         self.delete_trigger = partial(delete_functions_trigger, config)
         self.delete_trigger.__doc__ = delete_functions_trigger.__doc__
         self.register_custom_domain = partial(register_functions_custom_domain, config)

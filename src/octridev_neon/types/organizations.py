@@ -3,7 +3,7 @@
 
 import importlib
 
-from .organizations_part001 import (
+from .organizations_create_organizations_api_key import (
     ListOrganizationsMembersResponse,
     MemberRole,
     MemberUserInfo,
@@ -26,7 +26,7 @@ from .organizations_part001 import (
     VPCEndpointWithRegion,
     VPCEndpointWithRegionVariant1,
 )
-from .organizations_part002 import (
+from .organizations_shared import (
     Invitation,
     Member,
     OrganizationInviteCreateRequest,
@@ -63,15 +63,17 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_organizations_part001 = importlib.import_module(".organizations_part001", __package__)
+_organizations_create_organizations_api_key = importlib.import_module(
+    ".organizations_create_organizations_api_key", __package__
+)
 
-_deferred_organizations_part001: tuple[tuple[str, object], ...] = (
+_deferred_organizations_create_organizations_api_key: tuple[tuple[str, object], ...] = (
     ("Invitation", Invitation),
     ("Member", Member),
     ("OrganizationInviteCreateRequest", OrganizationInviteCreateRequest),
 )
-for _name, _value in _deferred_organizations_part001:
-    setattr(_organizations_part001, _name, _value)
+for _name, _value in _deferred_organizations_create_organizations_api_key:
+    setattr(_organizations_create_organizations_api_key, _name, _value)
 
 OrgApiKeyCreateRequestVariant1.model_rebuild()
 OrgApiKeyCreateRequest.model_rebuild()

@@ -3,7 +3,17 @@
 
 import importlib
 
-from .functions_part001 import (
+from .functions_create_functions_trigger import (
+    ScheduleTrigger,
+    ScheduleTriggerCreateRequest,
+    ScheduleTriggerUpdateRequest,
+    StorageObjectCreatedTrigger,
+    StorageObjectCreatedTriggerCreateRequest,
+    StorageObjectCreatedTriggerUpdateRequest,
+    TriggerResponse,
+    TriggersListResponse,
+)
+from .functions_shared import (
     CustomDomain,
     CustomDomainRegisterRequest,
     CustomDomainsListResponse,
@@ -25,16 +35,6 @@ from .functions_part001 import (
     UnknownTrigger,
     UnknownTriggerCreateRequest,
     UnknownTriggerUpdateRequest,
-)
-from .functions_part002 import (
-    ScheduleTrigger,
-    ScheduleTriggerCreateRequest,
-    ScheduleTriggerUpdateRequest,
-    StorageObjectCreatedTrigger,
-    StorageObjectCreatedTriggerCreateRequest,
-    StorageObjectCreatedTriggerUpdateRequest,
-    TriggerResponse,
-    TriggersListResponse,
 )
 
 __all__ = [
@@ -71,9 +71,9 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_functions_part001 = importlib.import_module(".functions_part001", __package__)
+_functions_shared = importlib.import_module(".functions_shared", __package__)
 
-_deferred_functions_part001: tuple[tuple[str, object], ...] = (
+_deferred_functions_shared: tuple[tuple[str, object], ...] = (
     ("ScheduleTrigger", ScheduleTrigger),
     ("ScheduleTriggerCreateRequest", ScheduleTriggerCreateRequest),
     ("ScheduleTriggerUpdateRequest", ScheduleTriggerUpdateRequest),
@@ -81,8 +81,8 @@ _deferred_functions_part001: tuple[tuple[str, object], ...] = (
     ("StorageObjectCreatedTriggerCreateRequest", StorageObjectCreatedTriggerCreateRequest),
     ("StorageObjectCreatedTriggerUpdateRequest", StorageObjectCreatedTriggerUpdateRequest),
 )
-for _name, _value in _deferred_functions_part001:
-    setattr(_functions_part001, _name, _value)
+for _name, _value in _deferred_functions_shared:
+    setattr(_functions_shared, _name, _value)
 
 NeonFunction.model_rebuild()
 NeonFunctionDeployment.model_rebuild()

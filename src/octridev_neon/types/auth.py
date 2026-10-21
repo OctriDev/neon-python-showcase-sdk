@@ -3,7 +3,7 @@
 
 import importlib
 
-from .auth_part001 import (
+from .auth_create_auth_user import (
     CreateBranchNeonAuthNewUserRequest,
     ListNeonAuthOAuthClientsResponse,
     NeonAuthAllowLocalhostResponse,
@@ -28,7 +28,7 @@ from .auth_part001 import (
     UpdateNeonAuthUserRoleRequest,
     UpdateNeonAuthUserRoleResponse,
 )
-from .auth_part002 import (
+from .auth_shared import (
     EnableNeonAuthIntegrationRequest,
     NeonAuthConfigResponse,
     NeonAuthConfigUpdate,
@@ -83,13 +83,13 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_auth_part001 = importlib.import_module(".auth_part001", __package__)
+_auth_create_auth_user = importlib.import_module(".auth_create_auth_user", __package__)
 
-_deferred_auth_part001: tuple[tuple[str, object], ...] = (
+_deferred_auth_create_auth_user: tuple[tuple[str, object], ...] = (
     ("NeonAuthOAuthClient", NeonAuthOAuthClient),
 )
-for _name, _value in _deferred_auth_part001:
-    setattr(_auth_part001, _name, _value)
+for _name, _value in _deferred_auth_create_auth_user:
+    setattr(_auth_create_auth_user, _name, _value)
 
 CreateBranchNeonAuthNewUserRequest.model_rebuild()
 UpdateNeonAuthUserRoleRequest.model_rebuild()
