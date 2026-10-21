@@ -3,7 +3,7 @@
 
 import importlib
 
-from .branch_part001 import (
+from .branch_shared import (
     AnonymizationRunMetadata,
     AnonymizedBranchStatusResponse,
     BranchCreateRequest,
@@ -25,7 +25,7 @@ from .branch_part001 import (
     RolePasswordResponse,
     RoleResponse,
 )
-from .branch_part002 import (
+from .branch_update_branch_database import (
     BranchAnonymizedCreateRequest,
     BranchAnonymizedCreateRequestVariant1,
     BranchCreateRequestEndpointOptions,
@@ -89,14 +89,14 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_branch_part001 = importlib.import_module(".branch_part001", __package__)
+_branch_shared = importlib.import_module(".branch_shared", __package__)
 
-_deferred_branch_part001: tuple[tuple[str, object], ...] = (
+_deferred_branch_shared: tuple[tuple[str, object], ...] = (
     ("BranchCreateRequestEndpointOptions", BranchCreateRequestEndpointOptions),
     ("BranchSchemaJSON", BranchSchemaJSON),
 )
-for _name, _value in _deferred_branch_part001:
-    setattr(_branch_part001, _name, _value)
+for _name, _value in _deferred_branch_shared:
+    setattr(_branch_shared, _name, _value)
 
 BranchCreateRequestBranch.model_rebuild()
 BranchCreateRequest.model_rebuild()

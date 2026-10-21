@@ -3,7 +3,7 @@
 
 import importlib
 
-from .shared_part001 import (
+from .shared2 import (
     BillingSubscriptionType,
     BranchesResponse,
     ComputeUnit,
@@ -40,7 +40,7 @@ from .shared_part001 import (
     TransferProjectsToOrganizationRequest,
     VPCEndpointsResponse,
 )
-from .shared_part002 import (
+from .shared3 import (
     Endpoint,
     EndpointSettingsData,
     ErrorCode,
@@ -117,15 +117,15 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_shared_part001 = importlib.import_module(".shared_part001", __package__)
+_shared2 = importlib.import_module(".shared2", __package__)
 
-_deferred_shared_part001: tuple[tuple[str, object], ...] = (
+_deferred_shared2: tuple[tuple[str, object], ...] = (
     ("Endpoint", Endpoint),
     ("NeonAuthOauthProvider", NeonAuthOauthProvider),
     ("NeonAuthRedirectURIWhitelistDomain", NeonAuthRedirectURIWhitelistDomain),
 )
-for _name, _value in _deferred_shared_part001:
-    setattr(_shared_part001, _name, _value)
+for _name, _value in _deferred_shared2:
+    setattr(_shared2, _name, _value)
 
 EmptyResponse.model_rebuild()
 OperationsResponse.model_rebuild()

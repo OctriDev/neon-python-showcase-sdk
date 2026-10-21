@@ -3,7 +3,7 @@
 
 import importlib
 
-from .project_part001 import (
+from .project_add_project_jwks import (
     JWKS,
     AcceptProjectTransferRequestSatisfiesPlanError,
     AcceptProjectTransferRequestSatisfiesPlanErrorReasonsItem,
@@ -28,7 +28,7 @@ from .project_part001 import (
     ProjectUpdateRequest,
     ProjectUpdateRequestProject,
 )
-from .project_part002 import (
+from .project_shared import (
     ApplicationType,
     CreateProjectResponse,
     JWKSCreationOperation,
@@ -38,8 +38,8 @@ from .project_part002 import (
     SetProjectMemberRoleRequest,
     UpdateProjectResponse,
 )
-from .project_part003 import Project, ProjectMember, ProjectMemberRoleResponse, ProjectSettingsData
-from .project_part004 import (
+from .project_shared2 import Project, ProjectMember, ProjectMemberRoleResponse, ProjectSettingsData
+from .project_shared3 import (
     DefaultEndpointSettings,
     ProjectCreateRequest,
     ProjectCreateRequestProject,
@@ -92,17 +92,17 @@ __all__ = [
 
 # Forward references deferred to TYPE_CHECKING in the parts above are
 # resolvable now that every part is loaded.
-_project_part001 = importlib.import_module(".project_part001", __package__)
+_project_add_project_jwks = importlib.import_module(".project_add_project_jwks", __package__)
 
-_deferred_project_part001: tuple[tuple[str, object], ...] = (
+_deferred_project_add_project_jwks: tuple[tuple[str, object], ...] = (
     ("DefaultEndpointSettings", DefaultEndpointSettings),
     ("Project", Project),
     ("ProjectListItem", ProjectListItem),
     ("ProjectMember", ProjectMember),
     ("ProjectSettingsData", ProjectSettingsData),
 )
-for _name, _value in _deferred_project_part001:
-    setattr(_project_part001, _name, _value)
+for _name, _value in _deferred_project_add_project_jwks:
+    setattr(_project_add_project_jwks, _name, _value)
 
 AddProjectJWKSRequest.model_rebuild()
 JWKS.model_rebuild()
@@ -123,15 +123,15 @@ AllowedIps.model_rebuild()
 MaintenanceWindow.model_rebuild()
 JWKSResponse.model_rebuild()
 
-_project_part002 = importlib.import_module(".project_part002", __package__)
+_project_shared = importlib.import_module(".project_shared", __package__)
 
-_deferred_project_part002: tuple[tuple[str, object], ...] = (
+_deferred_project_shared: tuple[tuple[str, object], ...] = (
     ("DefaultEndpointSettings", DefaultEndpointSettings),
     ("Project", Project),
     ("ProjectSettingsData", ProjectSettingsData),
 )
-for _name, _value in _deferred_project_part002:
-    setattr(_project_part002, _name, _value)
+for _name, _value in _deferred_project_shared:
+    setattr(_project_shared, _name, _value)
 
 ProjectQuota.model_rebuild()
 JWKSCreationOperation.model_rebuild()
@@ -140,14 +140,14 @@ UpdateProjectResponse.model_rebuild()
 SetProjectMemberRoleRequest.model_rebuild()
 ProjectListItem.model_rebuild()
 
-_project_part003 = importlib.import_module(".project_part003", __package__)
+_project_shared2 = importlib.import_module(".project_shared2", __package__)
 
-_deferred_project_part003: tuple[tuple[str, object], ...] = (
+_deferred_project_shared2: tuple[tuple[str, object], ...] = (
     ("DefaultEndpointSettings", DefaultEndpointSettings),
     ("ProjectOwnerData", ProjectOwnerData),
 )
-for _name, _value in _deferred_project_part003:
-    setattr(_project_part003, _name, _value)
+for _name, _value in _deferred_project_shared2:
+    setattr(_project_shared2, _name, _value)
 
 Project.model_rebuild()
 ProjectMember.model_rebuild()
